@@ -1,19 +1,23 @@
 <footer>
     <div class="footerContent">
         <div>
-            <h3>Navigation</h3>
             <nav>
+                <h3>Navigation</h3>
                 <?php wp_nav_menu(array('menu' => 'Header Menu')); ?>
             </nav>
         </div>
         <div>
-            <h3>Horaires</h3>
+            <?php
 
-            <p>Du lundi au vendredi</p>
-
-            <p>9h00 à 17h00</p>
-
-            <p>Fermé le week-end</p>
+            query_posts(array('post_type' => 'horaire'));
+            if (have_posts()):while (have_posts()):the_post();
+                ?>
+                <h3><?php the_title(); ?></h3>
+                <p><?php echo get_post_meta(get_the_ID(), 'horaire_day', true); ?></p>
+                <p><?php echo get_post_meta(get_the_ID(), 'horaire_hour', true) ?></p>
+                <p><?php echo get_post_meta(get_the_ID(), 'horaire_close', true) ?></p>
+            <?php endwhile; endif;
+            wp_reset_query(); ?>
 
             <form action="#" method="post">
                 <fieldset>
@@ -25,30 +29,36 @@
         </div>
         <div>
             <?php
-           /* $taxonomies=get_taxonomies('','names');
-            foreach ($taxonomies as $taxonomy ) {
-                if($taxonomy == 'category_contact'){
-                echo '<p>'. $taxonomy. '</p>';
-                }
-            }*/
 
-            query_posts(array('post_type'=>'contact', 'category_contact'=>'pied-de-page'));
-            if(have_posts()):while(have_posts()):the_post();
-           ?>
-            <h3><?php the_title(); ?></h3>
-                <?php $key_value = get_post_meta(get_the_ID(), 'contact_street', true);?>
-            <p><?php var_dump(get_post_meta($post->ID)); ?></p>
-        <?php endwhile; endif; wp_reset_query(); ?>
+            query_posts(array('post_type' => 'contact', 'category_contact' => 'pied-de-page'));
+            if (have_posts()):while (have_posts()):the_post();
+                ?>
+                <h3><?php the_title(); ?></h3>
+                <p><?php echo get_post_meta(get_the_ID(), 'contact_title', true); ?></p>
+                <p><?php echo get_post_meta(get_the_ID(), 'contact_street', true) . ' ' . get_post_meta(get_the_ID(), 'contcat_number', true); ?></p>
+                <p><?php echo get_post_meta(get_the_ID(), 'contact_cp', true) . ' ' . get_post_meta(get_the_ID(), 'contcat_town', true); ?></p>
+                <p><?php echo get_post_meta(get_the_ID(), 'contact_phone', true); ?></p>
+                <p><?php echo get_post_meta(get_the_ID(), 'contact_email1', true); ?></p>
+            <?php endwhile; endif;
+            wp_reset_query(); ?>
         </div>
         <div>
-            <h3> Plan d'accès</h3>
-            <a href="./html/contacts.html" title="Vers la page Contacts"><img src="./img/carte.jpg" alt="Plan d'accès à la FAR"/></a>
+            <?php
+
+            query_posts(array('post_type' => 'contact', 'category_contact' => 'pied-de-page'));
+            if (have_posts()):while (have_posts()):the_post();
+                ?>
+                <h3><?php echo get_post_meta(get_the_ID(), 'contact_map_title', true); ?></h3>
+                <div><?php echo get_post_meta(get_the_ID(), 'contact_map', true); ?></div>
+            <?php endwhile; endif;
+            wp_reset_query(); ?>
         </div>
     </div>
-    <div class="copy">
-        <p>© 2013 - Tous droits réservés / Form'action André Renard / Design <a href="http://anna.buffart.eu" title="Vers le site de abDesign">abDesign</a></p>
-    </div>
 </footer>
+<div class="copy">
+    <?php $user_info = get_userdata(1); ?>
+    <p>© <?php the_time('Y'); ?> - Tous droits réservés / <?php bloginfo('description'); ?> / Design <?php the_author_link(); ?></p>
+</div>
 <!--<script src = "http://code.jquery.com/jquery-1.9.0.min.js" ></script > -->
 <script src="./js/jquery.js" type="text/javascript"></script>
 <script src="js/scriptFar.js" type="text/javascript"></script>

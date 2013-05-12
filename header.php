@@ -69,15 +69,14 @@
 </head>
 
 <body <?php body_class(); ?>>
-<div class="container">
     <header class="header" role="banner">
         <!-- to use a image just replace the bloginfo('name') with your img src and remove the surrounding <p> -->
         <div class="banner">
             <h1 id="logo" class="h1">
                 <a href="<?php echo home_url(); ?>" rel="nofollow"><img src="http://farwp.buffart.eu/wp-content/uploads/2013/05/headerBis3.png" title="Logo de la FAR"/><?php bloginfo('description'); ?></p></a>
             </h1>
-
             <nav role="navigation">
+                <h2 class="noDisplay" style="display: none">Navigation principale</h2>
                 <?php wp_nav_menu(array('menu' => 'Header Menu')); ?>
             </nav>
         </div>

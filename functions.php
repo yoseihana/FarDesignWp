@@ -6,6 +6,10 @@ add_action('after_setup_theme', 'far_setup');
 add_action('init', 'add_taxonomies');
 add_theme_support('post-thumbnails');
 
+/*
+ * Create custom taxonomy
+ */
+
 if(! function_exists('add_taxonomies')){
     function add_taxonomies(){
 
@@ -57,8 +61,19 @@ if(! function_exists('add_taxonomies')){
             'query_var'=>true,
             'rewrite'=>true
         ));
+
+        register_taxonomy('category_image', 'autre_image', array(
+            'label'=> 'Catégorie image',
+            'hierarchical'=>true,
+            'query_var'=>true,
+            'rewrite'=>true
+        ));
     }
 }
+
+/*
+ * Create custom post type
+ */
 
 if (!function_exists('create_post_type'))
 {
@@ -162,9 +177,40 @@ if (!function_exists('create_post_type'))
             )
         );
 
+        register_post_type('horaire',
+            array(
+                'labels' => array(
+                    'name' => __('Horaire'),
+                    'singular_name' => __('Horaire'),
+                ),
+                'supports' => array('title'),
+                'public' => true,
+                'has_archive' => true,
+                'hierarchical' => true,
+                'menu_position' => true,
+            )
+        );
+
+        register_post_type('autre_image',
+            array(
+                'labels' => array(
+                    'name' => __('Autres images'),
+                    'singular_name' => __('Autres images'),
+                ),
+                'supports' => array('title', 'excerpt', 'thumbnail', 'page-attributes'),
+                'public' => true,
+                'has_archive' => true,
+                'hierarchical' => true,
+                'menu_position' => true,
+            )
+        );
+
     }
 }
 
+/*
+ * Create custom meta box
+ */
 if (!class_exists('far_custom_field'))
 {
 
@@ -177,7 +223,7 @@ if (!class_exists('far_custom_field'))
         /**
          * @var  array  $post_types  An array of public custom post types, plus the standard "post" and "page" - add the custom types you want to include here
          */
-        var $post_types = array("publications", "email", "audiovisuel", "contact", "liens", "chaine_youtube", "equipe");
+        var $post_types = array("publications", "email", "audiovisuel", "contact", "liens", "chaine_youtube", "equipe", "horaire", "autre_image");
         /**
          * @var  array  $custom_fields  Defines the custom fields available
          */
@@ -187,7 +233,7 @@ if (!class_exists('far_custom_field'))
                 "title" => "Le liens",
                 "description" => "",
                 "type" => "text",
-                "scope" => array("publications", "audiovisuel", "liens", "chaine_youtube"),
+                "scope" => array("publications", "audiovisuel", "liens", "chaine_youtube", "autre_image"),
                 "capability" => "edit_posts"
             ),
             array(
@@ -195,7 +241,7 @@ if (!class_exists('far_custom_field'))
                 "title" => "Le titre du lien",
                 "description" => "",
                 "type" => "text",
-                "scope" => array("publications", "audiovisuel", "liens", "chaine_youtube"),
+                "scope" => array("publications", "audiovisuel", "liens", "chaine_youtube", "autre_image"),
                 "capability" => "edit_posts"
             ),
             array(
@@ -286,6 +332,51 @@ if (!class_exists('far_custom_field'))
                 "type" => "input",
                 "scope" => array("contact", "equipe"),
                 "capability" => "manage_options"
+            ),
+
+            array(
+                "name" => "contact_map_title",
+                "title" => "Titre de la map",
+                "description" => "",
+                "type" => "text",
+                "scope" => array("contact"),
+                "capability" => "manage_options"
+            ),
+
+            array(
+                "name" => "contact_map",
+                "title" => "Map Google",
+                "description" => "",
+                "type" => "textarea",
+                "scope" => array("contact"),
+                "capability" => "manage_options"
+            ),
+
+            array(
+                "name" => "horaire_day",
+                "title" => "Jours de la semaine",
+                "description" => "",
+                "type" => "input",
+                "scope" => array("horaire"),
+                "capability" => "manage_options"
+            ),
+
+            array(
+                "name" => "horaire_hour",
+                "title" => "Heures d'ouverture",
+                "description" => "",
+                "type" => "input",
+                "scope" => array("horaire"),
+                "capability" => "manage_options"
+            ),
+
+            array(
+                "name" => "horaire_close",
+                "title" => "Fermeture",
+                "description" => "",
+                "type" => "input",
+                "scope" => array("horaire"),
+                "capability" => "manage_options"
             )
 
         );
@@ -353,13 +444,29 @@ if (!class_exists('far_custom_field'))
                             <?php
                             switch ($custom_field['type'])
                             {
-                                case "textarea":
+                                case "textarea":{
+                                    // Text area
+                                    echo '<label for="' . $custom_field[ 'name' ] .'"><b>' . $custom_field[ 'title' ] . '</b></label>';
+                                    echo '<textarea name="' . $custom_field[ 'name' ] . '" id="' . $custom_field[ 'name' ] . '" columns="30" rows="3">' . htmlspecialchars( get_post_meta( $post->ID, $custom_field[ 'name' ], true ) ) . '</textarea>';
+                                    // WYSIWYG
+                                    if ( $custom_field[ 'type' ] == "wysiwyg" ) { ?>
+                                        <script type="text/javascript">
+                                            jQuery( document ).ready( function() {
+                                                jQuery( "<?php echo $custom_field[ 'name' ]; ?>" ).addClass( "mceEditor" );
+                                                if ( typeof( tinyMCE ) == "object" && typeof( tinyMCE.execCommand ) == "function" ) {
+                                                    tinyMCE.execCommand( "mceAddControl", false, "<?php echo $custom_field[ 'name' ]; ?>" );
+                                                }
+                                            });
+                                        </script>
+                                    <?php }
+                                    break;
+                                }
 
                                 default:
                                     {
                                     // Plain text field
-                                    echo '<label for="' . $this->prefix . $custom_field['name'] . '"><b>' . $custom_field['title'] . '</b></label>';
-                                    echo '<input type="text" name="' . $this->prefix . $custom_field['name'] . '" id="' . $this->prefix . $custom_field['name'] . '" value="' . htmlspecialchars(get_post_meta($post->ID, $this->prefix . $custom_field['name'], true)) . '" />';
+                                    echo '<label for="'. $custom_field['name'] . '"><b>' . $custom_field['title'] . '</b></label>';
+                                    echo '<input type="text" name="'. $custom_field['name'] . '" id="' . $custom_field['name'] . '" value="' . htmlspecialchars(get_post_meta($post->ID, $custom_field['name'], true)) . '" />';
                                     break;
                                     }
                             }
@@ -389,15 +496,15 @@ if (!class_exists('far_custom_field'))
             {
                 if (current_user_can($custom_field['capability'], $post_id))
                 {
-                    if (isset($_POST[$this->prefix . $custom_field['name']]) && trim($_POST[$this->prefix . $custom_field['name']]))
+                    if (isset($_POST[ $custom_field['name']]) && trim($_POST[$custom_field['name']]))
                     {
-                        $value = $_POST[$this->prefix . $custom_field['name']];
+                        $value = $_POST[$custom_field['name']];
                         // Auto-paragraphs for any WYSIWYG
                         if ($custom_field['type'] == "wysiwyg") $value = wpautop($value);
-                        update_post_meta($post_id, $this->prefix . $custom_field['name'], $value);
+                        update_post_meta($post_id, $custom_field['name'], $value);
                     } else
                     {
-                        delete_post_meta($post_id, $this->prefix . $custom_field['name']);
+                        delete_post_meta($post_id, $custom_field['name']);
                     }
                 }
             }
