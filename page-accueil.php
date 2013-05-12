@@ -2,18 +2,17 @@
 <div id="content">
 
     <header>
-        <h1 class="noDisplay" style="display: none">A propos de la FAR</h1>
+        <!--<h1 class="noDisplay" style="display: none">A propos de la FAR</h1>-->
 
         <div class="slider">
-            <h2 class="noDisplay" style="display: none">Slider d'accueil de la FAR</h2>
             <?php
 
-            query_posts(array('post_type' => 'autre_image', 'category_image' => 'slider-accueil'));
+            query_posts(array('post_type' => 'autre_image', 'category_image' => 'slider-accueil', 'posts_per_page'=>6, 'orderby'=>'menu_order'));
             if (have_posts()):while (have_posts()):the_post();
                 ?>
                 <figure>
 
-                    <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>"><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?> </a>
+                    <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>"><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?></a>
 
                     <figcaption class="infoSlider">
                         <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>">
@@ -42,7 +41,6 @@
         <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
             <header class="titleOutliner">
                 <h2>La <?php bloginfo('description'); ?></h2>
-
             </header>
             <p>
                 <?php the_content(); ?>
@@ -54,7 +52,7 @@
                 <h2 class="noDisplay" style="display: none">Navigation interne</h2>
                 <ol>
                     <?php
-                    query_posts(array('post_type' => 'autre_image', 'category_image' => 'navigation'));
+                    query_posts(array('post_type' => 'autre_image', 'category_image' => 'navigation', 'posts_per_page'=>6, 'orderby'=>'menu_order'));
                     if (have_posts()):while (have_posts()):
                     the_post();
                     ?>
@@ -74,9 +72,5 @@
 
     </section>
     <!-- end #main -->
-</div>
-<!-- end .content -->
 
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="js/scriptFar.js" type="text/javascript"></script>
 <?php get_footer(); ?>

@@ -13,7 +13,7 @@ add_theme_support('post-thumbnails');
 if(! function_exists('add_taxonomies')){
     function add_taxonomies(){
 
-        register_taxonomy('category_video', 'audiovisuel', array(
+        register_taxonomy('category_video', 'audiovisual', array(
             'label'=> 'Catégorie vidéo',
             'hierarchical'=>true,
             'query_var'=>true,
@@ -27,7 +27,7 @@ if(! function_exists('add_taxonomies')){
             'rewrite'=>true
         ));
 
-        register_taxonomy('category_link', 'liens', array(
+        register_taxonomy('category_link', 'links', array(
             'label'=> 'Catégorie lien',
             'hierarchical'=>true,
             'query_var'=>true,
@@ -55,7 +55,7 @@ if(! function_exists('add_taxonomies')){
             'rewrite'=>true
         ));
 
-        register_taxonomy('category_publication', 'publications', array(
+        register_taxonomy('category_publication', 'publishing', array(
             'label'=> 'Catégorie publication',
             'hierarchical'=>true,
             'query_var'=>true,
@@ -79,11 +79,11 @@ if (!function_exists('create_post_type'))
 {
     function create_post_type()
     {
-        register_post_type('publications',
+        register_post_type('publishing',
             array(
                 'labels' => array(
-                    'name' => __('Publications'),
-                    'singular_name' => __('Publications'),
+                    'name' => __('Parutions'),
+                    'singular_name' => __('Parutions'),
                 ),
                 'supports' => array('title', 'editor', 'thumbnail', 'page-attributes'),
                 'public' => true,
@@ -93,7 +93,7 @@ if (!function_exists('create_post_type'))
             )
         );
 
-        register_post_type('audiovisuel',
+        register_post_type('audiovisual',
             array(
                 'labels' => array(
                     'name' => __('Films'),
@@ -121,7 +121,7 @@ if (!function_exists('create_post_type'))
             )
         );
 
-        register_post_type('liens',
+        register_post_type('links',
             array(
                 'labels' => array(
                     'name' => __('Liens'),
@@ -195,7 +195,7 @@ if (!function_exists('create_post_type'))
             array(
                 'labels' => array(
                     'name' => __('Autres images'),
-                    'singular_name' => __('Autres images'),
+                    'singular_name' => __('Autres Ajouter'),
                 ),
                 'supports' => array('title', 'excerpt', 'thumbnail', 'page-attributes'),
                 'public' => true,
@@ -223,7 +223,7 @@ if (!class_exists('far_custom_field'))
         /**
          * @var  array  $post_types  An array of public custom post types, plus the standard "post" and "page" - add the custom types you want to include here
          */
-        var $post_types = array("publications", "email", "audiovisuel", "contact", "liens", "chaine_youtube", "equipe", "horaire", "autre_image");
+        var $post_types = array("publishing", "email", "audiovisual", "contact", "links", "chaine_youtube", "equipe", "horaire", "autre_image");
         /**
          * @var  array  $custom_fields  Defines the custom fields available
          */
@@ -233,7 +233,7 @@ if (!class_exists('far_custom_field'))
                 "title" => "Le liens",
                 "description" => "",
                 "type" => "text",
-                "scope" => array("publications", "audiovisuel", "liens", "chaine_youtube", "autre_image"),
+                "scope" => array("publishing", "audiovisual", "links", "chaine_youtube", "autre_image"),
                 "capability" => "edit_posts"
             ),
             array(
@@ -241,7 +241,7 @@ if (!class_exists('far_custom_field'))
                 "title" => "Le titre du lien",
                 "description" => "",
                 "type" => "text",
-                "scope" => array("publications", "audiovisuel", "liens", "chaine_youtube", "autre_image"),
+                  "scope" => array("publishing", "audiovisual", "links", "chaine_youtube", "autre_image"),
                 "capability" => "edit_posts"
             ),
             array(
