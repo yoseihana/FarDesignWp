@@ -115,15 +115,11 @@
     <section class="youtubeChaine">
     <h2 style="display:none;">Les chaines YouTubes</h2>
     <div>
-        <h3>Nos chaines YouTubes</h3>
+        <h3><?php $category = get_term_by('slug', 'nos-chaines-youtube', 'category_chaine'); echo $category ->name ?></h3>
         <ul class="linkTo">
             <?php query_posts(array('post_type' => 'chaine_youtube', 'category_chaine' => 'nos-chaines-youtube', 'orderby' => 'menu_order', 'order' => 'ASC'));
             if (have_posts()):while (have_posts()):the_post(); ?>
                 <li>
-                    <p><?php $category = get_the_terms(get_the_ID(), 'category_chaine');
-                        var_dump($category);
-                        var_dump($category[0]);
-                        ?></p>
                     <figure>
 
                         <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>">
@@ -137,7 +133,7 @@
         </ul>
     </div>
     <div>
-        <h3>Nos chaines YouTubes partenaires</h3>
+        <h3><?php $category = get_term_by('slug', 'nos-chaines-youtube-partenaires', 'category_chaine'); echo $category ->name ?></h3>
         <ul <?php query_posts(array('post_type' => 'chaine_youtube', 'category_chaine' => 'nos-chaines-youtube-partenaires', 'orderby' => 'menu_order', 'order' => 'ASC'));
         if (have_posts()):while (have_posts()):the_post(); ?>
             <li>

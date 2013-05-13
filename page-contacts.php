@@ -23,7 +23,7 @@
                 <h2><?php the_title(); ?></h2>
             </header>
             <div class="sectionContent">
-                <form action="form.php" method="post">
+                <form action="<?php bloginfo('template_directory'); ?>/form.php" method="post">
                     <fieldset>
                         <?php the_content(); ?>
                     </fieldset>

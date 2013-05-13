@@ -2,7 +2,7 @@
 
 add_action('init', 'create_post_type');
 add_action('widgets_init', 'far_sidebars');
-add_action('after_setup_theme', 'far_setup');
+//add_action('after_setup_theme', 'far_setup');
 add_action('init', 'add_taxonomies');
 add_theme_support('post-thumbnails');
 
@@ -34,14 +34,14 @@ if(! function_exists('add_taxonomies')){
             'rewrite'=>true
         ));
 
-        register_taxonomy('category_cours', 'cours', array(
+        register_taxonomy('category_cours', 'documents', array(
             'label'=> 'Catégorie cours',
             'hierarchical'=>true,
             'query_var'=>true,
             'rewrite'=>true
         ));
 
-        register_taxonomy('category_type', 'cours', array(
+        register_taxonomy('category_type', 'documents', array(
             'label'=> 'Catégorie type',
             'hierarchical'=>true,
             'query_var'=>true,
@@ -135,7 +135,7 @@ if (!function_exists('create_post_type'))
             )
         );
 
-        register_post_type('cours',
+        register_post_type('documents',
             array(
                 'labels' => array(
                     'name' => __('Cours'),
@@ -551,23 +551,6 @@ if(! function_exists('far_sidebars')){
 }
 
 
-/* Menu widget */
-if(! function_exists('far_setup')){
-    function far_setup(){
-        add_theme_support('automatic-feed-links');
-        add_theme_support('post-thumbnails');
-        add_theme_support('post-formats', array('aside', 'link', 'gallery', 'status', 'quote', 'image'));
-
-        //Intègre le menu de navigation dans une sidebar pour aller dans les pages qui intéresse
-        register_nav_menu('header menu', __('Header Menu', 'far'));
-
-        //Pour la dimension de l'image à la une
-        if(function_exists('add_image_size')){
-            add_image_size('folio-work', 640, 480, false);
-        }
-    }
-}
-
 /**
  * Custom box download
  */
@@ -578,7 +561,7 @@ function download_custom_meta_boxes(){
         'wp_custom_download',
         'Télécharger un fichier',
         'wp_custom_download',
-        'cours',
+        'documents',
         'normal'
     );
 
@@ -608,7 +591,7 @@ function save_custom_download($id){
         return  $id;
     }
 
-    if('cours' == $_POST['post_type']){
+    if('documents' == $_POST['post_type']){
         return $id;
     }else{
         if(!current_user_can('edit_page', $id)){
