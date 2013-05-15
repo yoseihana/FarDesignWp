@@ -41,19 +41,18 @@
         <?php endwhile; endif; ?>
         <form action="http://farwp.buffart.eu/wp-login.php" method="post">
             <fieldset>
-                <label for="user_login">
+                <legend>
                     Se connecter
-                </label>
-                <label for="id">
-                    Identifiant
-                </label>
-                <input type="text" name="log" id="user_login" placeholder="Se connecter"/>
-                <label for="user_pass">
-                    Mot de passe
-                </label>
-                <input type="password" name="mdp" id="user_pass" name="pwd" placeholder="Mot de passe"/>
-                <input type="submit"  id="wp-submit" name="wp-submit" value="Se connecter" name="connexion"/>
-                <input type="hidden" value="http://www.NOM_DU_SITE.com/" name="redirect_to">
+                </legend>
+                <label for="user_login">Identifiant</label>
+
+                <input type="text" tabindex="10" size="20" value="" id="user_login" name="log">
+                <label for="user_pass">Mot de passe</label>
+
+                <input type="password" tabindex="20" size="20" value="" id="user_pass" name="pwd">
+                <input type="submit" tabindex="100" value="Se connecter" id="wp-submit" name="wp-submit">
+
+                <input type="hidden" value="http://farwp.buffart.eu/cours" name="redirect_to">
             </fieldset>
         </form>
     </section>

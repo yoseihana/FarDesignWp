@@ -38,7 +38,9 @@ if(! function_exists('add_taxonomies')){
             'label'=> 'Catégorie cours',
             'hierarchical'=>true,
             'query_var'=>true,
-            'rewrite'=>true
+            'rewrite'=>true,
+            'menu_name'=>true,
+
         ));
 
         register_taxonomy('category_type', 'documents', array(
@@ -633,3 +635,4 @@ function update_edit_form(){
     echo 'enctype="multipart/form-data"';
 }
 add_action('post_edit_format_tag', 'update_edit_form');
+

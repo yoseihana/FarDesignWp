@@ -14,9 +14,9 @@
 </footer>
 </div>
 <!-- end .content -->
-<!--  <h2 class="noDisplay" style="display: none">Informations footer</h2> -->
-<footer>
-    <div class="footerContent">
+<h2 class="noDisplay" style="display: none">Informations complémentaires</h2>
+<footer class="footer">
+    <div class="banner">
         <div>
             <nav>
                 <h3>Navigation</h3>
@@ -71,11 +71,11 @@
             wp_reset_query(); ?>
         </div>
     </div>
+    <div class="copy">
+        <?php $user_info = get_userdata(1); ?>
+        <p>© <?php the_time('Y'); ?> - Tous droits réservés / <?php bloginfo('description'); ?> / Design <?php the_author_link(); ?></p>
+    </div>
 </footer>
-<div class="copy">
-    <?php $user_info = get_userdata(1); ?>
-    <p>© <?php the_time('Y'); ?> - Tous droits réservés / <?php bloginfo('description'); ?> / Design <?php the_author_link(); ?></p>
-</div>
 <!--<script src = "http://code.jquery.com/jquery-1.9.0.min.js" ></script > -->
 <!--<script src="./js/jquery.js" type="text/javascript"></script>
 <script src="js/scriptFar.js" type="text/javascript"></script>-->

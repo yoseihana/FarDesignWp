@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+
+.icon-edit:before { content: '\e0bf'; } /* '' */
+.icon-mail:before { content: '\e0eb'; } /* '' */
+.icon-chat-1:before { content: '\e720'; } /* '' */
+.icon-list:before { content: '\e765'; } /* '' */
+.icon-globe-inv:before { content: '\f019'; } /* '' */
+.icon-folder-open:before { content: '\f068'; } /* '' */
+.icon-doc-alt:before { content: '\f0f6'; } /* '' */
+.icon-folder-open-empty:before { content: '\f115'; } /* '' */
+.icon-picture-1:before { content: '\e800'; } /* '' */
+.icon-picture-2:before { content: '\e801'; } /* '' */
+.icon-videocam:before { content: '🎥'; } /* '\1f3a5' */
+.icon-video:before { content: '🎬'; } /* '\1f3ac' */
+.icon-user-1:before { content: '\e802'; } /* '' */
+.icon-users:before { content: '👥'; } /* '\1f465' */
+.icon-book-open:before { content: '📖'; } /* '\1f4d6' */
+.icon-search:before { content: '🔍'; } /* '\1f50d' */

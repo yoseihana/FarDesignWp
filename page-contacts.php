@@ -23,6 +23,7 @@
                 <h2><?php the_title(); ?></h2>
             </header>
             <div class="sectionContent">
+                <h3 style="display: none;">Nous contacter via le formulaire</h3>
                 <form action="<?php bloginfo('template_directory'); ?>/form.php" method="post">
                     <fieldset>
                         <?php the_content(); ?>
@@ -62,11 +63,12 @@
             the_post();
             ?>
             <header>
+                <h2 style="display: none;">Nos coordonnées</h2>
                 <span class="icon-mail"></span>
 
-                <h2><?php the_title(); ?></h2>
+                <h3><?php the_title(); ?></h3>
             </header>
-            <h2><?php echo get_post_meta(get_the_ID(), 'contact_title', true); ?></h2>
+            <p><?php echo get_post_meta(get_the_ID(), 'contact_title', true); ?><p>
 
             <p><?php echo get_post_meta(get_the_ID(), 'contact_street', true) . ' ' . get_post_meta(get_the_ID(), 'contact_number', true); ?></p>
 

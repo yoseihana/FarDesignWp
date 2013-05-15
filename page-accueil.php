@@ -1,10 +1,11 @@
 <?php get_header(); ?>
-<div id="content">
+<div class="content">
 
     <header>
-        <!--<h1 class="noDisplay" style="display: none">A propos de la FAR</h1>-->
 
         <div class="slider">
+            <h2 class="noDisplay" style="display: none">Slider d'accueil</h2>
+
             <?php
 
             query_posts(array('post_type' => 'autre_image', 'category_image' => 'slider-accueil', 'posts_per_page'=>6, 'orderby'=>'menu_order'));
@@ -14,7 +15,7 @@
 
                     <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>"><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?></a>
 
-                    <figcaption class="infoSlider">
+                    <figcaption class="infoBanner">
                         <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>">
                             <h3><?php the_title(); ?></h3>
 
@@ -60,8 +61,9 @@
                         <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>">
                             <figure>
                                 <?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
-                                <figcaption><?php echo the_title(); ?></figcaption>
+
                             </figure>
+                            <figcaption><?php echo the_title(); ?></figcaption>
                         </a>
                     </li>
                     <?php endwhile;
@@ -72,5 +74,6 @@
 
     </section>
     <!-- end #main -->
-
+    <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/js/scriptFar.js" type="text/javascript"></script>
 <?php get_footer(); ?>

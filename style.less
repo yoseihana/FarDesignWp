@@ -1,0 +1,508 @@
+/* Import fontello */
+/*@import "fontello/fontello.less";
+@import "fontello/fontello-codes.css";
+@import "fontello/fontello-embedded.css";
+@import "fontello/fontello-ie7-codes.css";
+@import "fontello/fontello-ie7.css";*/
+@import "reset";
+  /* Import GRID */
+@import 'grid';
+
+@columns: 12;
+@column-width: 60;
+@gutter-width: 20;
+@total-width: 100%;
+
+//Fonts
+@font-face {
+  font-family: 'SourceSansProBold';
+  src: url('Fonts/SourceSansPro-Bold-webfont.eot');
+  src: url('Fonts/SourceSansPro-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('Fonts/SourceSansPro-Bold-webfont.woff') format('woff'), url('Fonts/SourceSansPro-Bold-webfont.ttf') format('truetype'), url('Fonts/SourceSansPro-Bold-webfont.svg#SourceSansProBold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SourceSansProLight';
+  src: url('Fonts/SourceSansPro-Light-webfont.eot');
+  src: url('Fonts/SourceSansPro-Light-webfont.eot?#iefix') format('embedded-opentype'), url('Fonts/SourceSansPro-Light-webfont.woff') format('woff'), url('Fonts/SourceSansPro-Light-webfont.ttf') format('truetype'), url('Fonts/SourceSansPro-Light-webfont.svg#SourceSansProLight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SourceSansProRegular';
+  src: url('Fonts/SourceSansPro-Regular-webfont.eot');
+  src: url('Fonts/SourceSansPro-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('Fonts/SourceSansPro-Regular-webfont.woff') format('woff'), url('Fonts/SourceSansPro-Regular-webfont.ttf') format('truetype'), url('Fonts/SourceSansPro-Regular-webfont.svg#SourceSansProRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@proRegular: 'SourceSansProRegular', Arial, sans-serif;
+@proBold: 'SourceSansProBold', Arial, sans-serif;
+@proLight: 'SourceSansProLight', Arial, sans-serif;
+
+//Colors
+@deepGrey: #373737;
+@lightGrey: #CFCFCF;
+@lightBlue: #096099;
+@deepBlue: #061f40;
+@lightRed: #f21313;
+@deepRed: #b2172d;
+
+//Radius
+.radius-corners (@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+//Shadow
+  .box-shadow (@x: 0
+
+;
+@y: 0;
+@blur: 5px;
+@color: @lightGrey)
+{
+  box-shadow: @arguments
+;
+  -moz-box-shadow: @arguments
+;
+  -webkit-box-shadow: @arguments
+;
+}
+
+.clearfix() {
+  zoom: 1;
+  &:before {
+    content: '';
+    display: block;
+  }
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+/*
+* COMMON CONTENT
+*/
+
+body {
+  font-size: 16px;
+  font-family: @proRegular;
+  margin: -28px auto;
+}
+
+.titleDisplay {
+  display: none;
+}
+
+h2 {
+  font-family: @proBold;
+  margin-bottom: .5em;
+  font-size: 2em;
+  color: @lightRed;
+}
+
+a{
+  text-decoration: none;
+}
+
+h3 {
+  font-family: @proBold;
+  font-size: 1.5em;
+  margin-top: .5em;
+  color: @deepBlue;
+}
+
+p {
+  color: @deepBlue;
+  line-height: 1.25em;
+  margin-bottom: 1em;
+  font-family: @proLight;
+}
+
+.header, .footer {
+  clear: both;
+  height: 125px;
+  width: 100%;
+  background-color: @deepGrey;
+  color: white;
+
+  .banner {
+    width: 960px;
+    margin: 0 auto;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+
+    &:hover {
+      text-decoration: 1px solid @lightBlue;
+    }
+  }
+}
+
+.header {
+  border-bottom: 5px solid #cfcfcf;
+
+  .logo {
+    .column(4);
+
+    img {
+      .column(4);
+      margin-top: 1em;
+    }
+
+    h1 {
+      color: #fff;
+      .column(8);
+      margin-top: 10%;
+      font-family: 'SourceSansProBold', Arial, sans-serif;
+      font-size: 1.5em;
+    }
+  }
+
+  nav {
+    .column(8);
+    height: 37px;
+    margin-top: 2em;
+
+    li {
+      .column(3);
+      height: 20px;
+      position: relative;
+      font-family: @proBold;
+      margin-bottom: 1em;
+
+      &:before {
+        content: '|';
+        color: @lightBlue;
+        margin-right: 1em;
+        font-family: @proLight;
+      }
+
+      &:active {
+        color: @lightBlue;
+      }
+
+      &:hover a {
+        padding-right: 2em;
+        padding-bottom: 0.25em;
+        border-bottom: 3px solid white;
+      }
+    }
+
+    .current_page_item a {
+      padding-right: 2em;
+      padding-bottom: 0.25em;
+      border-bottom: 3px solid @lightBlue;
+    }
+
+  }
+}
+
+.footer {
+  border-top: 5px solid #cfcfcf;
+  height: 100%;
+
+  .banner div {
+    .column(3);
+    margin-top: 1em;
+
+    a {
+      font-family: @proLight;
+      color: @lightGrey;
+      margin-left: 1em;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .menu {
+      margin-top: 0em;
+    }
+  }
+
+  li {
+    margin: 0.25em 0;
+  }
+
+  h3 {
+    border-bottom: 1px solid #096099;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    font-family: @proBold;
+    color: white;
+    font-size: 1em;
+  }
+
+  p {
+    margin-left: 1em;
+    line-height: 1.25em;
+    margin-bottom: 0em;
+    font-family: @proLight;
+    color: @lightGrey;
+  }
+
+  .copy {
+    clear: both;
+    background-color: black;
+    color: @lightGrey;
+    font-size: .75em;
+    padding: .5em;
+    font-family: @proLight;
+
+    p {
+      margin: 1em 0 0 1em;
+      line-height: 0em;
+    }
+
+    a {
+      color: @lightBlue;
+      margin-bottom: 0.25em;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+fieldset {
+  padding: 1em;
+
+  label {
+    color: @lightGrey;
+    margin-bottom: .5em;
+    display: inline-block;
+  }
+  input[type="submit"] {
+    .column(6);
+    .push(6);
+    height: 25px;
+    color: white;
+    background-color: @lightBlue;
+    .radius-corners(6px);
+    border: 1px solid @deepBlue;
+    font-size: 0.8em;
+
+    &:hover {
+      cursor: pointer;
+      border: 1px solid @deepBlue;
+      background-color: @deepBlue;
+      color: #ffffff;
+    }
+  }
+
+  input[type='email'] {
+    height: 25px;
+    width: 200px;
+    margin-bottom: 1.5em;
+    border: 1px @deepGrey solid;
+    background-color: @lightGrey;
+    display: block;
+    .radius-corners;
+  }
+
+}
+
+.content {
+  width: 960px;
+  margin: 1em auto;
+}
+
+// Slider
+.slider {
+  border: .2em solid #cfcfcf;
+  height: 250px;
+  position: relative;
+
+  a {
+    display: block;
+    height: 250px;
+    text-decoration: none;
+
+    h3 {
+      font-family: @proBold;
+      margin-bottom: .5em;
+      font-size: 1.25em;
+      color: @lightRed;
+    }
+  }
+
+  .precedent, .suivant {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: '@proRegular';
+    top: 205px;
+    font-size: 2em;
+    cursor: pointer;
+    padding: 0 .5em;
+  }
+
+  .suivant {
+    left: 875px;
+  }
+
+  figure {
+    margin: 0px;
+  }
+
+  figcaption {
+    position: absolute;
+    top: 175px;
+    left: 25px;
+    width: 150px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 1em;
+    color: @deepBlue;
+    line-height: 1.25em;
+    .radius-corners(6px);
+    height: 20px;
+
+    a {
+      height: 50px;
+    }
+
+    h3 {
+      font-family: @proBold;
+      margin-bottom: .5em;
+      font-size: 1.25em;
+      color: @lightRed;
+    }
+  }
+
+  .infoBanner {
+    top: 75px;
+    left: 25px;
+    width: 250px;
+    height: 100px;
+
+    a {
+      height: 100px;
+    }
+  }
+
+}
+
+section {
+  margin: 2em 0;
+}
+
+.linkTo {
+  margin-top: 2.5em;
+
+  li {
+    .column(4);
+    margin-bottom: 1em;
+  }
+
+  a {
+    .column(12);
+  }
+
+  figure {
+    .column(4.5);
+  }
+
+  figcaption {
+    font-family: 'SourceSansProBold', Arial, sans-serif;
+    .column(7.5);
+    font-size: 1.5em;
+    margin-top: .5em;
+    color: @deepBlue;
+  }
+}
+
+.liens ul {
+  margin-top: 1em;
+  clear: both;
+
+  li {
+    .column(4);
+    margin-bottom: 1em;
+
+    a {
+      width: 100%;
+      display: inline-block;
+      text-align: center;
+      margin: 2em 0 1em 0;
+    }
+
+    img {
+      .box-shadow(5px;
+      5px);
+    }
+  }
+}
+
+/*
+* FORMATIONS
+*/
+section {
+
+  .contentColonne {
+    .column(8);
+    margin-bottom: 1em;
+  }
+  figure {
+    .column(4);
+    img {
+      border-bottom: 5px solid #cfcfcf;
+
+    }
+  }
+
+  h4 {
+    color: @lightBlue;
+    margin-top: 1em;
+    font-family: @proBold;
+    margin-bottom: .5em;
+  }
+
+  li {
+    color: @deepBlue;
+    list-style-type: square;
+    line-height: 1.5em;
+    margin-left: 2em;
+    font-family: @proLight;
+  }
+
+  em, b {
+    font-family: @proBold;
+  }
+}
+
+/*
+* PUBLICATIONS
+*/
+.page-id-6 section {
+
+  figure {
+    width: 100%;
+    text-align: center;
+
+    figcaption {
+      color: @deepRed;
+    }
+
+    &:hover {
+      figcaption {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  a figure:hover img {
+    border-bottom-color: @deepRed;
+  }
+}

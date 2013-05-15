@@ -54,13 +54,11 @@
     <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
     <![endif]-->
     <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_url'); ?>"/>
-
-    <!-- <link rel="stylesheet" type="text/css" href="./css/fontello/animation.css" media="screen"/>
-     <link rel="stylesheet" type="text/css" href="./css/fontello/fontello-codes.css" media="screen"/>
-     <link rel="stylesheet" type="text/css" href="./css/fontello/fontello-embedded.css" media="screen"/>
-     <link rel="stylesheet" type="text/css" href="./css/fontello/fontello-ie7-codes.css" media="screen"/>
-     <link rel="stylesheet" type="text/css" href="./css/fontello/fontello-ie7.css" media="screen"/>
-     <link rel="stylesheet" type="text/css" href="./css/fontello/fontello.css" media="screen"/>-->
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo get_template_directory_uri(); ?>/fontello/fontello-codes.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo get_template_directory_uri(); ?>/fontello/fontello-embedded.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo get_template_directory_uri(); ?>/fontello/fontello-ie7-codes.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo get_template_directory_uri(); ?>/fontello/fontello-ie7.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo get_template_directory_uri(); ?>/fontello/fontello.css"/>
 
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 
@@ -69,16 +67,19 @@
 </head>
 
 <body <?php body_class(); ?>>
-    <header class="header" role="banner">
-        <!-- to use a image just replace the bloginfo('name') with your img src and remove the surrounding <p> -->
-        <div class="banner">
-            <h1 id="logo" class="h1">
-                <a href="<?php echo home_url(); ?>" rel="nofollow"><img src="http://farwp.buffart.eu/wp-content/uploads/2013/05/headerBis3.png" title="Logo de la FAR"/><?php bloginfo('description'); ?></p></a>
-            </h1>
-            <nav role="navigation">
-                <h2 class="noDisplay" style="display: none">Navigation principale</h2>
-                <?php wp_nav_menu(array('menu' => 'Header Menu')); ?>
-            </nav>
-        </div>
-    </header>
-    <!-- end header -->
+<header class="header" role="banner">
+    <!-- to use a image just replace the bloginfo('name') with your img src and remove the surrounding <p> -->
+    <div class="banner">
+
+        <a class="logo" href="<?php echo home_url(); ?>" rel="nofollow"><img src="http://farwp.buffart.eu/wp-content/uploads/2013/05/headerBis3.png" title="Logo de la FAR" alt="logo"/>
+
+            <h1 class="h1"><?php bloginfo('description'); ?></h1>
+        </a>
+
+        <nav role="navigation">
+            <h2 class="titleDisplay">Navigation principale</h2>
+            <?php wp_nav_menu(array('menu' => 'Header Menu')); ?>
+        </nav>
+    </div>
+</header>
+<!-- end header -->

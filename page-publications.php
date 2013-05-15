@@ -27,31 +27,51 @@
             <?php the_title(); ?>
         </h2>
     </header>
-    <div class="contentColonne">
+    <div>
 
         <div class="intro"><?php the_content(); ?></div>
-    <?php
-    query_posts(array('post_type' => 'publishing', 'orderby' => 'menu_order', 'order'=>'ASC'));
-    if (have_posts()):while (have_posts()):
-        the_post();
-        ?>
-        <div class="publication">
-            <header>
-                <h3><?php the_title(); ?></h3>
-            </header>
-            <p>
-                <?php the_content(); ?></p>
+        <?php
+        query_posts(array('post_type' => 'publishing', 'orderby' => 'menu_order', 'order' => 'ASC'));
+        if (have_posts()):while (have_posts()):
+            the_post();
+            ?>
+            <div class="publication">
+                <header>
+                    <?php $id_post = get_the_ID();
+                    $terms = wp_get_post_terms($id_post, 'category_publication');
+                    $slug = $terms[0]->slug;
 
+                    if($slug == 'cat-video'){ ?>
+                        <h3 class="icon-videocam"><?php the_title(); ?></h3>
 
+                    <?php }elseif($slug == 'cat-blog'){ ?>
+                        <h3 class="icon-edit"><?php the_title(); ?></h3>
+
+                     <?php }elseif($slug == 'cat-journal'){ ?>
+                        <h3 class="icon-book-open"><?php the_title(); ?></h3>
+
+                    <?php }elseif($slug == 'cat-documentation'){ ?>
+                        <h3 class="icon-edit"><?php the_title(); ?></h3>
+
+                    <?php } ?>
+                </header>
+                <p>
+                    <?php the_content(); ?>
+                </p>
+
+                <p>
+
+                </p>
                 <figure>
-                    <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>">
+                    <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>">
                         <?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
-                        <figcaption><?php get_post_meta(get_the_ID(), 'link_title', true); ?></figcaption></a>
+                        <figcaption><?php echo get_post_meta(get_the_ID(), 'title_link', true); ?></figcaption>
+                    </a>
                 </figure>
-        </div>
-    <?php endwhile;
-    endif;
-    wp_reset_query(); ?>
+            </div>
+        <?php endwhile;
+        endif;
+        wp_reset_query(); ?>
     </div>
 <?php endwhile;
 endif; ?>
