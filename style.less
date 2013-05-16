@@ -109,8 +109,17 @@ h2 {
   color: @lightRed;
 }
 
-a{
+a {
   text-decoration: none;
+  color: @lightRed;
+
+  &:hover img {
+    border-bottom: 5px solid @deepRed;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 h3 {
@@ -289,8 +298,8 @@ fieldset {
     .column(6);
     .push(6);
     height: 25px;
-    color: white;
-    background-color: @lightBlue;
+    color: @deepGrey;
+    background-color: @lightGrey;
     .radius-corners(6px);
     border: 1px solid @deepBlue;
     font-size: 0.8em;
@@ -303,7 +312,7 @@ fieldset {
     }
   }
 
-  input[type='email'] {
+  input[type='email'], input[type='text'] {
     height: 25px;
     width: 200px;
     margin-bottom: 1.5em;
@@ -311,6 +320,13 @@ fieldset {
     background-color: @lightGrey;
     display: block;
     .radius-corners;
+  }
+
+  textarea {
+    border: 1px @deepGrey solid;
+    background-color: @lightGrey;
+    width: 95%;
+    .radius-corners()
   }
 
 }
@@ -330,6 +346,10 @@ fieldset {
     display: block;
     height: 250px;
     text-decoration: none;
+
+    &:hover img {
+      border-bottom: none;
+    }
 
     h3 {
       font-family: @proBold;
@@ -376,6 +396,7 @@ fieldset {
     h3 {
       font-family: @proBold;
       margin-bottom: .5em;
+      margin-top: 0em;
       font-size: 1.25em;
       color: @lightRed;
     }
@@ -408,6 +429,10 @@ section {
 
   a {
     .column(12);
+
+    &:hover figcaption {
+      text-decoration: underline;
+    }
   }
 
   figure {
@@ -415,11 +440,11 @@ section {
   }
 
   figcaption {
-    font-family: 'SourceSansProBold', Arial, sans-serif;
+    font-family: @proBold;
     .column(7.5);
     font-size: 1.5em;
     margin-top: .5em;
-    color: @deepBlue;
+    color: @deepRed;
   }
 }
 
@@ -457,16 +482,9 @@ section {
   figure {
     .column(4);
     img {
-      border-bottom: 5px solid #cfcfcf;
+      border-bottom: 5px solid @lightGrey;
 
     }
-  }
-
-  h4 {
-    color: @lightBlue;
-    margin-top: 1em;
-    font-family: @proBold;
-    margin-bottom: .5em;
   }
 
   li {
@@ -480,6 +498,13 @@ section {
   em, b {
     font-family: @proBold;
   }
+}
+
+h4 {
+  color: @lightBlue;
+  margin-top: 1em;
+  font-family: @proBold;
+  margin-bottom: .5em;
 }
 
 /*
@@ -502,7 +527,263 @@ section {
     }
   }
 
-  a figure:hover img {
-    border-bottom-color: @deepRed;
+  .intro {
+    margin-bottom: 3em;
   }
 }
+
+/*
+* AUDIOVISUEL
+*/
+
+.films {
+  li {
+    list-style-type: none;
+    margin-left: 0em;
+    margin-bottom: 2em;
+  }
+}
+
+aside {
+  .column(4);
+  margin-top: 4em;
+  background-color: @lightBlue;
+  height: 100%;
+  .radius-corners(6px);
+
+  div {
+    margin-bottom: 1em;
+  }
+
+  span {
+    color: @deepBlue;
+    position: relative;
+    top: .5em;
+    font-size: 2.5em;
+    left: 115px;
+    margin-bottom: .5em;
+  }
+
+  h3 {
+    color: #fff;
+    padding: 1em 1em 0.5em 0.75em;
+  }
+
+  ol {
+    padding: 0em 1em;
+  }
+
+  li {
+    margin-bottom: .5em;
+    list-style: square;
+    margin-left: 1em;
+    font-family: @proBold;
+    font-size: 1.25em;
+    color: @deepBlue;
+
+    a {
+      color: #ffffff;
+
+      &:hover {
+        border-bottom: 5px solid @deepBlue;
+        text-decoration: none;
+      }
+    }
+  }
+
+  p {
+    font-family: @proRegular;
+    color: #fff;
+    padding: 0.25em 1em 0 1em;
+    margin-bottom: 0em;
+  }
+}
+
+.youtubeChaine {
+  clear: both;
+
+  div {
+    .column(5.75);
+    border-right: 1px solid @lightBlue;
+    margin-bottom: 1em;
+  }
+
+  div:last-child {
+    border-right: none;
+  }
+
+  .linkTo li {
+    .column(6);
+
+    figure {
+      // .column(6);
+    }
+  }
+}
+
+/*
+* CONTACT
+*/
+.contentColonne {
+
+  fieldset {
+    border: 1px solid @lightGrey;
+    padding: 1em;
+    background-color: @deepRed;
+    height: 100%;
+    .radius-corners(6px);
+
+    p {
+      color: white;
+      font-family: @proLight;
+    }
+
+    label {
+      font-family: @proRegular;
+      color: white;
+    }
+
+    input, textarea {
+      margin-bottom: 0.25em;
+      border-color: @lightGrey;
+    }
+
+    li {
+      list-style-type: none;
+    }
+  }
+}
+
+.page-id-20 {
+  aside {
+    margin-top: -1em;
+
+    input[type='email'] {
+      width: 250px;
+    }
+
+    dl {
+      padding: 0em 1em;
+      color: white;
+
+      dt {
+        font-family: @proRegular;
+        margin-top: 0.5em;
+      }
+
+      dd {
+        font-family: @proLight;
+      }
+    }
+  }
+}
+
+.contactEquipe {
+  clear: both;
+
+  div {
+    .column(3);
+    height: 400px;
+
+    h3 {
+      height: 50px;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+/*
+* LIENS
+*/
+.sectionLink {
+  .column(5.95);
+  border-right: 1px solid @lightBlue;
+  margin-bottom: 1em;
+  margin-top: 1em;
+
+  header {
+    margin-bottom: 1em;
+  }
+
+  div {
+    .column(12);
+    margin-bottom: 2em;
+  }
+
+  figure {
+    .column(2.75);
+    margin-bottom: 0.2em;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+}
+
+.autres {
+  border-right: none;
+}
+
+/*
+* COURS
+*/
+.contentColonne li {
+ // list-style-type: none;
+}
+
+/*.niveau {
+
+  div {
+    background-color: @deepRed;
+    cursor: pointer;
+    .column(12);
+    margin-bottom: 2em;
+
+    h3 {
+      color: #fff;
+      font-size: 1em;
+      .column(9);
+      padding: .5em 0;
+    }
+
+    h4 {
+      padding: .5em 0;
+      color: #fff;
+      font-family: @proBold;
+      .column(9);
+
+      &:after {
+        content: "+";
+      }
+    }
+
+    h5 {
+      color: @deepRed;
+      &:after {
+        content: '+';
+      }
+    }
+  }
+
+  .year div {
+    background-color: @deepBlue;
+    cursor: pointer;
+    .column(11.5);
+    .push(0.5);
+    margin-bottom: 2em;
+
+  }
+
+  .thematique div {
+    border: 1px solid @lightGrey;
+    background-color: #ffffff;
+    cursor: pointer;
+    .column(11);
+    .push(1);
+    margin-bottom: 1em;
+  }
+}*/

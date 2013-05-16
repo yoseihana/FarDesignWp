@@ -10,7 +10,7 @@
             <fiigure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
 
                 <figcaption>
-                    <p><?php the_title(); ?></p>
+                    <h3><?php the_title(); ?></h3>
                 </figcaption>
                 <?php endwhile;
                 endif;
@@ -22,8 +22,9 @@
             <header>
                 <h2><?php the_title(); ?></h2>
             </header>
-            <div class="sectionContent">
+            <div class="contentColonne">
                 <h3 style="display: none;">Nous contacter via le formulaire</h3>
+
                 <form action="<?php bloginfo('template_directory'); ?>/form.php" method="post">
                     <fieldset>
                         <?php the_content(); ?>
@@ -31,30 +32,6 @@
                 </form>
             </div>
         <?php endwhile; endif; ?>
-        <div class="contactEquipe">
-            <header>
-                <h2>
-                    Contacter les membres de l'équipe
-                </h2>
-            </header>
-            <?php
-            query_posts(array('post_type' => 'equipe', 'orderby' => 'menu_order', 'order' => 'ASC'));
-            if (have_posts()):while (have_posts()):
-                the_post();
-                ?>
-                <div>
-                    <h3><?php the_title(); ?></h3>
-                    <figure><?php the_post_thumbnail('thumbnail', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?></figure>
-                    <p class="poste"><?php echo get_post_meta(get_the_ID(), 'poste_equipe', true); ?></p>
-
-                    <p class="email"><?php echo get_post_meta(get_the_ID(), 'contact_email1', true); ?></p>
-
-                    <p class="email"><?php echo get_post_meta(get_the_ID(), 'contact_email2', true); ?></p>
-
-                </div>
-            <?php endwhile;
-            endif;
-            wp_reset_query(); ?>
     </section>
     <aside>
         <?php
@@ -91,4 +68,31 @@
             </fieldset>
         </form>
     </aside>
+    <div class="contactEquipe">
+        <header>
+            <h2>
+                Contacter les membres de l'équipe
+            </h2>
+        </header>
+        <?php
+        query_posts(array('post_type' => 'equipe', 'orderby' => 'menu_order', 'order' => 'ASC','posts_per_page'=>20));
+        if (have_posts()):while (have_posts()):
+            the_post();
+            ?>
+            <div>
+                <h3><?php the_title(); ?></h3>
+                <figure><?php the_post_thumbnail('thumbnail', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?></figure>
+                <p class="poste"><?php echo get_post_meta(get_the_ID(), 'poste_equipe', true); ?></p>
+                <h4>Email(s)</h4>
+                <p class="email"><?php echo get_post_meta(get_the_ID(), 'contact_email1', true); ?></p>
+
+                <p class="email"><?php echo get_post_meta(get_the_ID(), 'contact_email2', true); ?></p>
+
+            </div>
+        <?php endwhile;
+        endif;
+        wp_reset_query(); ?>
+
+    </div>
+
 <?php get_footer(); ?>

@@ -9,10 +9,10 @@
             if (have_posts()):while (have_posts()):
             the_post();
             ?>
-            <fiigure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
+            <figure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
 
                 <figcaption>
-                    <p><?php the_title(); ?></p>
+                    <h3><?php the_title(); ?></h3>
                 </figcaption>
                 <?php endwhile;
                 endif;

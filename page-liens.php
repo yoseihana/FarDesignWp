@@ -11,7 +11,7 @@
             <fiigure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
 
                 <figcaption>
-                    <p><?php the_title(); ?></p>
+                    <h3><?php the_title(); ?></h3>
                 </figcaption>
                 <?php endwhile;
                 endif;
@@ -20,7 +20,7 @@
     </header>
 
 
-    <section class="lienLeft associés">
+    <section class="sectionLink">
 
         <header>
             <h2>
@@ -36,9 +36,9 @@
                 <figure>
                     <?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
                 </figure>
-                <h2>
+                <h3>
                     <?php the_title(); ?>
-                </h2>
+                </h3>
 
                 <p class="url"><a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>"><?php echo get_post_meta(get_the_ID(), 'title_link', true); ?></a></p>
 
@@ -49,11 +49,11 @@
         <?php endwhile; endif;
         wp_reset_query(); ?>
     </section>
-    <section class="lienRight autres">
+    <section class="sectionLink autres">
         <header>
-            <h1>
+            <h2>
                 Nos autres sites
-            </h1>
+            </h2>
         </header>
         <?php
         query_posts(array('post_type' => 'links', 'category_link' => 'autres-sites', 'orderby' => 'menu_order', 'order' => 'ASC'));
@@ -63,9 +63,9 @@
             <figure>
                 <?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
             </figure>
-            <h2>
+            <h3>
                 <?php the_title(); ?>
-            </h2>
+            </h3>
 
             <p class="url"><a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>"><?php echo get_post_meta(get_the_ID(), 'title_link', true); ?></a></p>
 

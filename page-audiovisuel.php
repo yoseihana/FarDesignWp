@@ -11,7 +11,7 @@
             <fiigure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
 
                 <figcaption>
-                    <p><?php the_title(); ?></p>
+                    <h3><?php the_title(); ?></h3>
                 </figcaption>
                 <?php endwhile;
                 endif;
@@ -62,7 +62,8 @@
             </div>
     </section>
     <aside>
-        <h2 style="display: none">A propose des réalisateurs</h2>
+        <h2 class="titleDisplay">A propose des réalisateurs</h2>
+
         <div class="autresFilms">
             <header>
                 <span class="icon-video"></span>
@@ -113,41 +114,44 @@
         </div>
     </aside>
     <section class="youtubeChaine">
-    <h2 style="display:none;">Les chaines YouTubes</h2>
-    <div>
-        <h3><?php $category = get_term_by('slug', 'nos-chaines-youtube', 'category_chaine'); echo $category ->name ?></h3>
-        <ul class="linkTo">
-            <?php query_posts(array('post_type' => 'chaine_youtube', 'category_chaine' => 'nos-chaines-youtube', 'orderby' => 'menu_order', 'order' => 'ASC'));
-            if (have_posts()):while (have_posts()):the_post(); ?>
-                <li>
-                    <figure>
+        <h2 class="titleDisplay">Les chaines YouTubes</h2>
 
+        <div>
+            <h3><?php $category = get_term_by('slug', 'nos-chaines-youtube', 'category_chaine');
+                echo $category->name ?></h3>
+            <ul class="linkTo">
+                <?php query_posts(array('post_type' => 'chaine_youtube', 'category_chaine' => 'nos-chaines-youtube', 'orderby' => 'menu_order', 'order' => 'ASC'));
+                if (have_posts()):while (have_posts()):the_post(); ?>
+                    <li>
                         <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>">
-                            <?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
+                            <figure>
+                                <?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
+                            </figure>
                             <figcaption><?php the_title() ?></figcaption>
                         </a>
-                    </figure>
 
-                </li>
-            <?php endwhile; endif; ?>
-        </ul>
-    </div>
-    <div>
-        <h3><?php $category = get_term_by('slug', 'nos-chaines-youtube-partenaires', 'category_chaine'); echo $category ->name ?></h3>
-        <ul <?php query_posts(array('post_type' => 'chaine_youtube', 'category_chaine' => 'nos-chaines-youtube-partenaires', 'orderby' => 'menu_order', 'order' => 'ASC'));
-        if (have_posts()):while (have_posts()):the_post(); ?>
-            <li>
+                    </li>
+                <?php endwhile; endif; ?>
+            </ul>
+        </div>
+        <div>
+            <h3><?php $category = get_term_by('slug', 'nos-chaines-youtube-partenaires', 'category_chaine');
+                echo $category->name ?></h3>
+            <ul class="linkTo"><?php query_posts(array('post_type' => 'chaine_youtube', 'category_chaine' => 'nos-chaines-youtube-partenaires', 'orderby' => 'menu_order', 'order' => 'ASC'));
+                if (have_posts()):while (have_posts()):the_post(); ?>
+                    <li>
+                        <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>">
 
-                <figure>
+                            <figure>
+                                <?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
+                            </figure>
 
-                    <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>">
-                        <?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
-                        <figcaption><?php the_title() ?></figcaption>
-                    </a>
-                </figure>
+                            <figcaption><?php the_title() ?></figcaption>
+                        </a>
 
-            </li>
-        <?php endwhile; endif; ?>
-        </ul>
-    </div>
+                    </li>
+                <?php endwhile; endif; ?>
+            </ul>
+        </div>
+    </section>
 <?php get_footer(); ?>
