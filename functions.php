@@ -2,9 +2,10 @@
 
 add_action('init', 'create_post_type');
 add_action('widgets_init', 'far_sidebars');
-//add_action('after_setup_theme', 'far_setup');
+add_action('after_setup_theme', 'far_setup');
 add_action('init', 'add_taxonomies');
 add_theme_support('post-thumbnails');
+add_action('post_edit_format_tag', 'update_edit_form');
 
 /*
  * Create custom taxonomy
@@ -630,9 +631,26 @@ function save_custom_download($id){
 
 add_action('add_meta_boxes', 'download_custom_meta_boxes');
 
-/*Update the post */
+/**
+ * Update the post
+ */
 function update_edit_form(){
     echo 'enctype="multipart/form-data"';
 }
-add_action('post_edit_format_tag', 'update_edit_form');
+
+
+/**
+ * Intégration MENU
+ */
+if(! function_exists('far_setup')){
+    function far_setup(){
+        add_theme_support('automatic-feed-links');
+        add_theme_support('post-thumbnails');
+        add_theme_support('post-formats', array('aside', 'link', 'gallery', 'status', 'quote', 'image'));
+
+        //Intègre le menu de navigation dans une sidebar pour aller dans les pages qui intéresse
+        register_nav_menu('header menu', __('Header Menu', 'portfolio'));
+
+    }
+}
 

@@ -102,6 +102,10 @@ body {
   display: none;
 }
 
+ul, ol{
+  margin-bottom: 1em;
+}
+
 h2 {
   font-family: @proBold;
   margin-bottom: .5em;
@@ -111,7 +115,7 @@ h2 {
 
 a {
   text-decoration: none;
-  color: @lightRed;
+  color: @deepRed;
 
   &:hover img {
     border-bottom: 5px solid @deepRed;
@@ -170,19 +174,23 @@ p {
       margin-top: 1em;
     }
 
+    &:hover img{
+      border-bottom: none;
+    }
+
     h1 {
       color: #fff;
       .column(8);
-      margin-top: 10%;
+      margin-top: 1em;
       font-family: 'SourceSansProBold', Arial, sans-serif;
-      font-size: 1.5em;
+      font-size: 1em;
     }
   }
 
   nav {
     .column(8);
     height: 37px;
-    margin-top: 2em;
+    margin-top: 1em;
 
     li {
       .column(3);
@@ -203,14 +211,12 @@ p {
       }
 
       &:hover a {
-        padding-right: 2em;
         padding-bottom: 0.25em;
         border-bottom: 3px solid white;
       }
     }
 
     .current_page_item a {
-      padding-right: 2em;
       padding-bottom: 0.25em;
       border-bottom: 3px solid @lightBlue;
     }
@@ -224,7 +230,6 @@ p {
 
   .banner div {
     .column(3);
-    margin-top: 1em;
 
     a {
       font-family: @proLight;
@@ -242,7 +247,7 @@ p {
   }
 
   li {
-    margin: 0.25em 0;
+    margin-bottom: 0.25em;
   }
 
   h3 {
@@ -317,14 +322,12 @@ fieldset {
     width: 200px;
     margin-bottom: 1.5em;
     border: 1px @deepGrey solid;
-    background-color: @lightGrey;
     display: block;
     .radius-corners;
   }
 
   textarea {
     border: 1px @deepGrey solid;
-    background-color: @lightGrey;
     width: 95%;
     .radius-corners()
   }
@@ -337,14 +340,23 @@ fieldset {
 }
 
 // Slider
-.slider {
-  border: .2em solid #cfcfcf;
+body .sliderAccueil{
   height: 250px;
+
+  figcaption{
+    top: 175px;
+    width: 150px;
+  }
+}
+
+.slider, .sliderAccueil{
+  border: .2em solid #cfcfcf;
+  height: 175px;
   position: relative;
 
   a {
     display: block;
-    height: 250px;
+    height: 150px;
     text-decoration: none;
 
     &:hover img {
@@ -379,9 +391,9 @@ fieldset {
 
   figcaption {
     position: absolute;
-    top: 175px;
+    top: 110px;
     left: 25px;
-    width: 150px;
+    width: 200px;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 1em;
     color: @deepBlue;
@@ -473,12 +485,13 @@ section {
 /*
 * FORMATIONS
 */
+.contentColonne {
+  .column(8);
+  margin-bottom: 1em;
+}
+
 section {
 
-  .contentColonne {
-    .column(8);
-    margin-bottom: 1em;
-  }
   figure {
     .column(4);
     img {
@@ -529,6 +542,33 @@ h4 {
 
   .intro {
     margin-bottom: 3em;
+  }
+}
+
+.publication{
+  background-color: @lightBlue;
+  .column(3);
+  .radius-corners();
+  padding-bottom: 1em;
+
+  span{
+    color: @deepBlue;
+    .column(2);
+    font-size: 2em;
+    .push(5);
+    .pull(5);
+  }
+
+  p, header{
+    margin: 0.5em;
+  }
+
+  p, h3, figure a figcaption{
+    color: #ffffff;
+  }
+
+  a:hover img{
+    border-color: #ffffff;
   }
 }
 
@@ -681,6 +721,10 @@ aside {
 .contactEquipe {
   clear: both;
 
+  .poste{
+    height: 30px;
+  }
+
   div {
     .column(3);
     height: 400px;
@@ -787,3 +831,16 @@ aside {
     margin-bottom: 1em;
   }
 }*/
+
+/*
+* ARCHIVES
+*/
+
+section.contentColonne{
+  margin-top: 2em;
+}
+
+article{
+  margin: 1em 0 2em 0;
+  border-bottom: 1px solid @lightBlue;
+}

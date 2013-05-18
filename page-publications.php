@@ -42,18 +42,19 @@
                     $slug = $terms[0]->slug;
 
                     if($slug == 'cat-video'){ ?>
-                        <h3 class="icon-videocam"><?php the_title(); ?></h3>
+                        <span class="icon-videocam"></span>
 
                     <?php }elseif($slug == 'cat-blog'){ ?>
-                        <h3 class="icon-edit"><?php the_title(); ?></h3>
+                        <span class="icon-edit"></span>
 
                      <?php }elseif($slug == 'cat-journal'){ ?>
-                        <h3 class="icon-book-open"><?php the_title(); ?></h3>
+                        <span class="icon-book-open"></span>
 
                     <?php }elseif($slug == 'cat-documentation'){ ?>
-                        <h3 class="icon-edit"><?php the_title(); ?></h3>
+                        <span class="icon-folder-open"></span>
 
                     <?php } ?>
+                    <h3><?php the_title(); ?></h3>
                 </header>
                 <p>
                     <?php the_content(); ?>

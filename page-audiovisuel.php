@@ -30,7 +30,7 @@
             <p><?php the_content(); ?></p>
         <?php endwhile; endif; ?>
         <div class="contentColonne">
-            <h3>Notre dernière vidéo</h3>
+            <h3>Vidéo à la une</h3>
             <?php query_posts(array('post_type' => 'audiovisual', 'category_video' => 'nouvelle-video', 'posts_per_page' => 1));
             if (have_posts()):while (have_posts()):
             the_post(); ?>
@@ -44,6 +44,44 @@
                 endif;
                 wp_reset_query(); ?>
             </div>
+            <section class="youtubeChaine">
+                <h2 class="titleDisplay">Les chaines YouTubes</h2>
+
+                <div>
+                    <h3><?php $category = get_term_by('slug', 'nos-chaines-youtube', 'category_chaine');
+                        echo $category->name ?></h3>
+                    <ul class="linkTo">
+                        <?php query_posts(array('post_type' => 'chaine_youtube', 'category_chaine' => 'nos-chaines-youtube', 'orderby' => 'menu_order', 'order' => 'ASC'));
+                        if (have_posts()):while (have_posts()):the_post(); ?>
+                            <li class="icon-videocam">
+                                <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>">
+<?php the_title() ?>
+                                </a>
+
+                            </li>
+                        <?php endwhile; endif; ?>
+                    </ul>
+                </div>
+                <div>
+                    <h3><?php $category = get_term_by('slug', 'nos-chaines-youtube-partenaires', 'category_chaine');
+                        echo $category->name ?></h3>
+                    <ul class="linkTo"><?php query_posts(array('post_type' => 'chaine_youtube', 'category_chaine' => 'nos-chaines-youtube-partenaires', 'orderby' => 'menu_order', 'order' => 'ASC'));
+                        if (have_posts()):while (have_posts()):the_post(); ?>
+                            <li>
+                                <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>">
+
+                                    <figure>
+                                        <?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
+                                    </figure>
+
+                                    <figcaption><?php the_title() ?></figcaption>
+                                </a>
+
+                            </li>
+                        <?php endwhile; endif; ?>
+                    </ul>
+                </div>
+            </section>
             <div class="films">
                 <h3>Nos films</h3>
                 <ul>
@@ -71,14 +109,21 @@
                 <h3>Toutes nos réalisations</h3>
             </header>
             <ol>
-                <li>
-                    <a href="http://www.far.be/vitrinevideo/2012.html">Archives 2012</a>
-                </li>
+
+                <?php
+                $years = $wpdb->get_col("SELECT DISTINCT YEAR(post_date) FROM $wpdb->posts ORDER BY post_date DESC");
+                foreach ($years as $year) : ?>
+                    <li>
+
+                        <a href="<?php echo get_year_link($year); ?> "><?php echo 'Archives ' . $year; ?></a>
+
+                    </li>
+                <?php endforeach; ?>
                 <li>
                     <a href="http://www.far.be/vitrinevideo/2011.html">Archives 2011</a>
                 </li>
                 <li>
-                    <a href="http://www.far.be/vitrinevideo/2010.html">Aechives 2010</a>
+                    <a href="http://www.far.be/vitrinevideo/2010.html">Archives 2010</a>
                 </li>
                 <li>
                     <a href="http://www.far.be/vitrinevideo/archives.html">Archives antérieurs à 2010</a>
@@ -113,45 +158,5 @@
             wp_reset_query(); ?>
         </div>
     </aside>
-    <section class="youtubeChaine">
-        <h2 class="titleDisplay">Les chaines YouTubes</h2>
 
-        <div>
-            <h3><?php $category = get_term_by('slug', 'nos-chaines-youtube', 'category_chaine');
-                echo $category->name ?></h3>
-            <ul class="linkTo">
-                <?php query_posts(array('post_type' => 'chaine_youtube', 'category_chaine' => 'nos-chaines-youtube', 'orderby' => 'menu_order', 'order' => 'ASC'));
-                if (have_posts()):while (have_posts()):the_post(); ?>
-                    <li>
-                        <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>">
-                            <figure>
-                                <?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
-                            </figure>
-                            <figcaption><?php the_title() ?></figcaption>
-                        </a>
-
-                    </li>
-                <?php endwhile; endif; ?>
-            </ul>
-        </div>
-        <div>
-            <h3><?php $category = get_term_by('slug', 'nos-chaines-youtube-partenaires', 'category_chaine');
-                echo $category->name ?></h3>
-            <ul class="linkTo"><?php query_posts(array('post_type' => 'chaine_youtube', 'category_chaine' => 'nos-chaines-youtube-partenaires', 'orderby' => 'menu_order', 'order' => 'ASC'));
-                if (have_posts()):while (have_posts()):the_post(); ?>
-                    <li>
-                        <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>">
-
-                            <figure>
-                                <?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
-                            </figure>
-
-                            <figcaption><?php the_title() ?></figcaption>
-                        </a>
-
-                    </li>
-                <?php endwhile; endif; ?>
-            </ul>
-        </div>
-    </section>
 <?php get_footer(); ?>

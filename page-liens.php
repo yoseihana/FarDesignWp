@@ -24,7 +24,7 @@
 
         <header>
             <h2>
-                Nos sites associé
+                Nos sites associés
             </h2>
         </header>
         <?php
@@ -52,7 +52,7 @@
     <section class="sectionLink autres">
         <header>
             <h2>
-                Nos autres sites
+                Autres sites
             </h2>
         </header>
         <?php

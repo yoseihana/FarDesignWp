@@ -3,7 +3,7 @@
     <header>
         <div class="slider">
             <?php
-            query_posts(array('post_type' => 'autre_image', 'category_image' => 'cat-cours', 'posts_per_page' => 1));
+            query_posts(array('post_type' => 'autre_image', 'category_image' => 'cat-espace-membres', 'posts_per_page' => 1));
             if (have_posts()):while (have_posts()):
             the_post();
             ?>

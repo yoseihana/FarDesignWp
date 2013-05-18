@@ -3,12 +3,12 @@
 
     <header>
 
-        <div class="slider">
+        <div class="sliderAccueil">
             <h2 class="noDisplay" style="display: none">Slider d'accueil</h2>
 
             <?php
 
-            query_posts(array('post_type' => 'autre_image', 'category_image' => 'slider-accueil', 'posts_per_page'=>6, 'orderby'=>'menu_order'));
+            query_posts(array('post_type' => 'autre_image', 'category_image' => 'slider-accueil', 'posts_per_page'=>6, 'orderby'=>'menu_order', 'order'=>'ASC'));
             if (have_posts()):while (have_posts()):the_post();
                 ?>
                 <figure>
