@@ -30,80 +30,97 @@
         endif; ?>
             <p>Tous les documents en relation avec les cours.</p>
             <div class="contentColonne">
-
-                <ol id="formation">
-                    <?php $level_terms = get_terms("category_cours", array("orderby" => "slug", "parent" => 0, 'hide_empty' => 0, 'order' => 'ASC')); ?>
-                    <?php foreach ($level_terms as $key => $level_term) : ?>
+                <ol>
+                    <?php
+                    $args = array(
+                        'orderby' => 'name',
+                        'parent' => 0,
+                        'type' => 'documents',
+                        'hide_empty' => 0,
+                        'taxonomy' => 'category_cours'
+                    );
+                    $categories = get_categories($args);
+                    foreach ($categories as $category):
+                        //var_dump(get_category_link($category)); renvoie le lien de la catégorie
+                        ?>
                         <li class="niveau">
                             <div>
-                                <h3><?php echo $level_term->name; ?></h3>
+                                <p><?php echo $category->name; ?>
                             </div>
-                            <ul>
-                                <?php $args = array(
-                                    'child_of' => $level_term->term_id,
-                                    'taxonomy' => $level_term->taxonomy,
+                            <ol>
+                                <?php
+                                $arg2 = array(
+                                    'orderby' => 'name',
+                                    'parent' => 0,
+                                    'type' => 'documents',
                                     'hide_empty' => 0,
-                                    'hierarchical' => false,
-                                    'depth' => 0,
+                                    'taxonomy' => 'category_cours',
+                                    'child_of' => $category->cat_ID,
+                                    'parent' => $category->cat_ID,
                                 );
-
-                                $year_terms = get_categories($args);
-
-                                foreach ($year_terms as $year_term):
-                                    ?>
-
+                                $categories2 = get_categories($arg2);
+                                foreach ($categories2 as $category2):?>
                                     <li class="year">
                                         <div>
-                                            <?php
-                                            $year_parent = $year_term->parent;
-
-                                            $level_id = $level_term->term_id;
-
-                                            if ($year_parent == $level_id):?>
-                                            <h4><?php echo $year_term->name; ?></h4>
-
+                                            <p><?php echo $category2->name; ?></p>
                                         </div>
-                                        <? else: ?>
-                                            <ul>
+                                        <ol>
+                                            <?php
+                                            $arg3 = array(
+                                                'orderby' => 'name',
+                                                'parent' => 0,
+                                                'type' => 'documents',
+                                                'hide_empty' => 0,
+                                                'taxonomy' => 'category_cours',
+                                                'child_of' => $category2->cat_ID,
+                                                'parent' => $category2->cat_ID,
+                                            );
+                                            $categories3 = get_categories($arg3);
+                                            foreach ($categories3 as $category3):?>
                                                 <li class="thematique">
                                                     <div>
-                                                        <h5><?php echo $year_term->name; ?></h5>
+                                                        <p><?php echo $category3->name; ?></p>
                                                     </div>
                                                     <ul>
-                                                        <?php $args = array(
-                                                            'post_type' => 'documents', /* This is where you should put your Post Type */
+                                                        <?php query_posts(array(
+                                                            'post_type' => 'documents',
                                                             'tax_query' => array(
                                                                 array(
                                                                     'taxonomy' => 'category_cours',
                                                                     'field' => 'slug',
-                                                                    'terms' => $year_term->name,
-                                                                    ''
+                                                                    'terms' => $category3->slug
                                                                 )
                                                             )
-                                                        );
-                                                        $query = new WP_Query($args);?>
+                                                        ));
+                                                        if (have_posts()):while (have_posts()):
+                                                            the_post(); ?>
 
-                                                        <?php if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post(); ?>
                                                             <li>
-                                                                <p><?php the_title(); ?></p>
+                                                                <p><?php $postIds = get_the_ID();
+
+                                                                    $args = array('post_type' => 'attachment', 'numberposts' => -1, 'post_status' => 'any', 'post_parent' => $postIds);
+                                                                    $attachments = get_posts($args);
+                                                                    if ($attachments): foreach ($attachments as $attachment): ?>
+
+                                                                        <a href="<?php echo wp_get_attachment_url($attachment->ID); ?>" title="<?php the_excerpt(); ?>"><?php the_title(); ?></a>
+
+
+                                                                    <?php endforeach;
+                                                                    endif ?></p>
 
                                                             </li>
-                                                        <?php endwhile; endif;
-                                                        wp_reset_query(); ?>
+                                                        <?php endwhile; endif; ?>
                                                     </ul>
                                                 </li>
-                                            </ul>
-                                        <?
-                                        endif ?>
+                                            <?php endforeach; ?>
+                                        </ol>
                                     </li>
-                                <?php endforeach;
-                                ?>
-                            </ul>
-
+                                <?php endforeach; ?>
+                            </ol>
                         </li>
+
                     <?php endforeach; ?>
                 </ol>
-
             </div>
 
             <a href="<?php echo wp_logout_url(home_url()); ?>" title="Logout">Logout</a>
@@ -135,6 +152,7 @@
                 <input type="hidden" value="http://farwp.buffart.eu/cours/" name="redirect_to">
             </form>
         <?php
-        endif; ?>
+        endif;
+        ?>
     </section>
 <?php get_footer() ?>

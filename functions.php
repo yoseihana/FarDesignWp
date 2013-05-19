@@ -11,65 +11,67 @@ add_action('post_edit_format_tag', 'update_edit_form');
  * Create custom taxonomy
  */
 
-if(! function_exists('add_taxonomies')){
-    function add_taxonomies(){
+if (!function_exists('add_taxonomies'))
+{
+    function add_taxonomies()
+    {
 
         register_taxonomy('category_video', 'audiovisual', array(
-            'label'=> 'Catégorie vidéo',
-            'hierarchical'=>true,
-            'query_var'=>true,
-            'rewrite'=>true
+            'label' => 'Catégorie vidéo',
+            'hierarchical' => true,
+            'query_var' => true,
+            'rewrite' => true
         ));
 
         register_taxonomy('category_contact', 'contact', array(
-            'label'=> 'Catégorie contact',
-            'hierarchical'=>true,
-            'query_var'=>true,
-            'rewrite'=>true
+            'label' => 'Catégorie contact',
+            'hierarchical' => true,
+            'query_var' => true,
+            'rewrite' => true
         ));
 
         register_taxonomy('category_link', 'links', array(
-            'label'=> 'Catégorie lien',
-            'hierarchical'=>true,
-            'query_var'=>true,
-            'rewrite'=>true
+            'label' => 'Catégorie lien',
+            'hierarchical' => true,
+            'query_var' => true,
+            'rewrite' => true
         ));
 
         register_taxonomy('category_cours', 'documents', array(
-            'label'=> 'Catégorie cours',
-            'hierarchical'=>true,
-            'query_var'=>true,
-            'rewrite'=>true,
-            'menu_name'=>true,
+            'label' => 'Catégorie cours',
+            'hierarchical' => true,
+            'query_var' => true,
+            'rewrite' => true,
+            'menu_name' => true,
 
         ));
 
         register_taxonomy('category_type', 'documents', array(
-            'label'=> 'Catégorie type',
-            'hierarchical'=>true,
-            'query_var'=>true,
-            'rewrite'=>true
+            'label' => 'Catégorie type',
+            'hierarchical' => true,
+            'query_var' => true,
+            'rewrite' => true
         ));
 
         register_taxonomy('category_chaine', 'chaine_youtube', array(
-            'label'=> 'Catégorie chaine',
-            'hierarchical'=>true,
-            'query_var'=>true,
-            'rewrite'=>true
+            'label' => 'Catégorie chaine',
+            'hierarchical' => true,
+            'query_var' => true,
+            'rewrite' => true
         ));
 
         register_taxonomy('category_publication', 'publishing', array(
-            'label'=> 'Catégorie publication',
-            'hierarchical'=>true,
-            'query_var'=>true,
-            'rewrite'=>true
+            'label' => 'Catégorie publication',
+            'hierarchical' => true,
+            'query_var' => true,
+            'rewrite' => true
         ));
 
         register_taxonomy('category_image', 'autre_image', array(
-            'label'=> 'Catégorie image',
-            'hierarchical'=>true,
-            'query_var'=>true,
-            'rewrite'=>true
+            'label' => 'Catégorie image',
+            'hierarchical' => true,
+            'query_var' => true,
+            'rewrite' => true
         ));
     }
 }
@@ -144,7 +146,7 @@ if (!function_exists('create_post_type'))
                     'name' => __('Cours'),
                     'singular_name' => __('Cours'),
                 ),
-                'supports' => array('title', 'excerpt'),
+                'supports' => array('title', 'excerpt', 'editor'),
                 'public' => true,
                 'has_archive' => true,
                 'hierarchical' => true,
@@ -220,15 +222,15 @@ if (!class_exists('far_custom_field'))
     class far_custom_field
     {
         /**
-         * @var  string  $prefix  The prefix for storing custom fields in the postmeta table
+         * @var  string $prefix  The prefix for storing custom fields in the postmeta table
          */
         var $prefix = '_fcf_';
         /**
-         * @var  array  $post_types  An array of public custom post types, plus the standard "post" and "page" - add the custom types you want to include here
+         * @var  array $post_types  An array of public custom post types, plus the standard "post" and "page" - add the custom types you want to include here
          */
         var $post_types = array("publishing", "email", "audiovisual", "contact", "links", "chaine_youtube", "equipe", "horaire", "autre_image");
         /**
-         * @var  array  $custom_fields  Defines the custom fields available
+         * @var  array $custom_fields  Defines the custom fields available
          */
         var $custom_fields = array(
             array(
@@ -244,7 +246,7 @@ if (!class_exists('far_custom_field'))
                 "title" => "Le titre du lien",
                 "description" => "",
                 "type" => "text",
-                  "scope" => array("publishing", "audiovisual", "links", "chaine_youtube", "autre_image"),
+                "scope" => array("publishing", "audiovisual", "links", "chaine_youtube", "autre_image"),
                 "capability" => "edit_posts"
             ),
             array(
@@ -447,29 +449,33 @@ if (!class_exists('far_custom_field'))
                             <?php
                             switch ($custom_field['type'])
                             {
-                                case "textarea":{
+                                case "textarea":
+                                {
                                     // Text area
-                                    echo '<label for="' . $custom_field[ 'name' ] .'"><b>' . $custom_field[ 'title' ] . '</b></label>';
-                                    echo '<textarea name="' . $custom_field[ 'name' ] . '" id="' . $custom_field[ 'name' ] . '" columns="30" rows="3">' . htmlspecialchars( get_post_meta( $post->ID, $custom_field[ 'name' ], true ) ) . '</textarea>';
+                                    echo '<label for="' . $custom_field['name'] . '"><b>' . $custom_field['title'] . '</b></label>';
+                                    echo '<textarea name="' . $custom_field['name'] . '" id="' . $custom_field['name'] . '" columns="30" rows="3">' . htmlspecialchars(get_post_meta($post->ID, $custom_field['name'], true)) . '</textarea>';
                                     // WYSIWYG
-                                    if ( $custom_field[ 'type' ] == "wysiwyg" ) { ?>
+                                    if ($custom_field['type'] == "wysiwyg")
+                                    {
+                                        ?>
                                         <script type="text/javascript">
-                                            jQuery( document ).ready( function() {
-                                                jQuery( "<?php echo $custom_field[ 'name' ]; ?>" ).addClass( "mceEditor" );
-                                                if ( typeof( tinyMCE ) == "object" && typeof( tinyMCE.execCommand ) == "function" ) {
-                                                    tinyMCE.execCommand( "mceAddControl", false, "<?php echo $custom_field[ 'name' ]; ?>" );
+                                            jQuery(document).ready(function () {
+                                                jQuery("<?php echo $custom_field[ 'name' ]; ?>").addClass("mceEditor");
+                                                if (typeof( tinyMCE ) == "object" && typeof( tinyMCE.execCommand ) == "function") {
+                                                    tinyMCE.execCommand("mceAddControl", false, "<?php echo $custom_field[ 'name' ]; ?>");
                                                 }
                                             });
                                         </script>
-                                    <?php }
+                                    <?php
+                                    }
                                     break;
                                 }
 
                                 default:
                                     {
                                     // Plain text field
-                                    echo '<label for="'. $custom_field['name'] . '"><b>' . $custom_field['title'] . '</b></label>';
-                                    echo '<input type="text" name="'. $custom_field['name'] . '" id="' . $custom_field['name'] . '" value="' . htmlspecialchars(get_post_meta($post->ID, $custom_field['name'], true)) . '" />';
+                                    echo '<label for="' . $custom_field['name'] . '"><b>' . $custom_field['title'] . '</b></label>';
+                                    echo '<input type="text" name="' . $custom_field['name'] . '" id="' . $custom_field['name'] . '" value="' . htmlspecialchars(get_post_meta($post->ID, $custom_field['name'], true)) . '" />';
                                     break;
                                     }
                             }
@@ -499,7 +505,7 @@ if (!class_exists('far_custom_field'))
             {
                 if (current_user_can($custom_field['capability'], $post_id))
                 {
-                    if (isset($_POST[ $custom_field['name']]) && trim($_POST[$custom_field['name']]))
+                    if (isset($_POST[$custom_field['name']]) && trim($_POST[$custom_field['name']]))
                     {
                         $value = $_POST[$custom_field['name']];
                         // Auto-paragraphs for any WYSIWYG
@@ -525,125 +531,43 @@ if (class_exists('far_custom_field'))
 
 /* Choisir quel side bar selon les pages via admin ? */
 
-if(! function_exists('far_sidebars')){
-    function far_sidebars(){
+if (!function_exists('far_sidebars'))
+{
+    function far_sidebars()
+    {
         register_sidebar(
             array(
                 'id' => 'primary',
-                'name'=>__('Primary'),
+                'name' => __('Primary'),
                 'description' => __('First sidebar'),
-                'before_widget'=> '<div id="%1$s">',
+                'before_widget' => '<div id="%1$s">',
                 'after_widget' => '</div>',
                 'before_title' => '<h3 class="widget_titre">',
-                'after_title'=> '</h3>'
+                'after_title' => '</h3>'
             )
         );
 
         register_sidebar(
             array(
                 'id' => 'secondary',
-                'name'=>__('Secondary'),
+                'name' => __('Secondary'),
                 'description' => __('Second sidebar'),
-                'before_widget'=> '<div id="%1$s">',
+                'before_widget' => '<div id="%1$s">',
                 'after_widget' => '</div>',
                 'before_title' => '<h3 class="widget_titre">',
-                'after_title'=> '</h3>'
+                'after_title' => '</h3>'
             )
         );
     }
 }
 
-
-/**
- * Custom box download
- */
-/* Create meta box */
-function download_custom_meta_boxes(){
-    //Define the custom attachment for the posts
-    add_meta_box(
-        'wp_custom_download',
-        'Télécharger un fichier',
-        'wp_custom_download',
-        'documents',
-        'normal'
-    );
-
-}
-
-/* Create the upload input */
-function wp_custom_download(){
-    //Define the nonce value to validate and secure the upload
-    wp_nonce_field(plugin_basename(__FILE__), 'wp_custom_download_nonce');
-
-    $html='';
-    $html.='Télécharger le document ici';
-    $html.='';
-    $html.='<input type="file" id="wp_custom_download" name="wp_custom_download" value="" size="25">';
-    echo $html;
-
-}
-
-/* Save the uplaod */
-function save_custom_download($id){
-    //Security and verification
-    if(!wp_verify_nonce($_POST['wp_custom_download_nonce'], plugin_basename(__FILE__))){
-        return $id;
-    }
-
-    if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE){
-        return  $id;
-    }
-
-    if('documents' == $_POST['post_type']){
-        return $id;
-    }else{
-        if(!current_user_can('edit_page', $id)){
-            return $id;
-        }
-    }
-
-    //Verify if the file array is not empty
-    if(!empty($_FILES['wp_custom_download']['name'])){
-        //Support file type
-        $supported_types = array('application/pdf', 'application/jpg', 'application/jpeg', 'application/doc', 'application/docx', 'application/png', 'application/gif', 'application/xls', 'application/xlsx', 'application/txt', 'application/pdf');
-
-        //Get the file type of the upload
-        $arr_file_type = wp_check_filetype(basename($_FILES['wp_custom_download']['name']));
-        $uploaded_type = $arr_file_type['type'];
-
-        //Check the support file. If not, there is an error message
-        if(in_array($uploaded_type, $supported_types)){
-            //WP API to upload file, upload_bits save the file on the server
-            $upload = wp_upload_bits($_FILES['wp_custom_download']['name'], null, file_get_contents($_FILES['wp_custom_download']['tmp_name']));
-
-            if(isset($upload['error']) && $upload['error'] != 0){
-                wp_die('Une erreur est survenue lors du téléchargement du fichier:'.$upload['error']);
-            }else{
-                //Execute the upload and display to the user
-                add_post_meta($id, 'wp_custom_download', $upload);
-                update_post_meta($id, 'wp_custom_download', $uplaod);
-            }
-        }else{
-            wp_die("Le type de fichier téléchargé n'est pas supporter");
-        }
-    }
-}
-
-add_action('add_meta_boxes', 'download_custom_meta_boxes');
-
-/**
- * Update the post
- */
-function update_edit_form(){
-    echo 'enctype="multipart/form-data"';
-}
-
-
 /**
  * Intégration MENU
  */
-if(! function_exists('far_setup')){
-    function far_setup(){
+if (!function_exists('far_setup'))
+{
+    function far_setup()
+    {
         add_theme_support('automatic-feed-links');
         add_theme_support('post-thumbnails');
         add_theme_support('post-formats', array('aside', 'link', 'gallery', 'status', 'quote', 'image'));
@@ -653,4 +577,3 @@ if(! function_exists('far_setup')){
 
     }
 }
-
