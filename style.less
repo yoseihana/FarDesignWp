@@ -467,6 +467,7 @@ section {
   li {
     .column(4);
     margin-bottom: 1em;
+    height: 100px;
 
     a {
       width: 100%;
@@ -779,8 +780,46 @@ aside {
 /*
 * COURS
 */
-.contentColonne li {
-  // list-style-type: none;
+.page-id-336 aside{
+  margin-top: 0em;
+}
+
+#loginform {
+  .column(4);
+  .push(4);
+  border: 1px solid #cfcfcf;
+  padding-top: 1em;
+  background-color: @deepRed;
+  height: 100%;
+  .radius-corners();
+  color: white;
+
+  legend{
+    font-family: @proBold;
+  }
+
+  input{
+    background-color: @lightGrey;
+  }
+
+  input[type="text"], input[type="password"]{
+    width: 250px;
+    .radius-corners();
+  }
+}
+
+#logOut{
+  margin-top: -2em;
+  display: block;
+  font-family: @proBold;
+  float: right;
+  margin-right: 0.75em;
+
+  &:hover{
+    text-decoration: none;
+    border-bottom: 5px solid @deepRed;
+  }
+
 }
 
 .niveau {
@@ -793,7 +832,6 @@ aside {
 
   div {
     background-color: @deepRed;
-    cursor: pointer;
     .column(12);
     margin-bottom: 2em;
 
@@ -808,15 +846,17 @@ aside {
       padding: .5em 0;
       color: #fff;
       font-family: @proBold;
-      .column(9);
+      .column(11.5);
 
       &:after {
         content: "+";
+        margin-left: 2em;
       }
     }
 
     h5 {
       color: @deepRed;
+
       &:after {
         content: '+';
       }
@@ -834,6 +874,7 @@ aside {
     .column(11.5);
     .push(0.5);
     margin-bottom: 2em;
+    cursor: pointer;
 
     p:after {
       content: "+";
