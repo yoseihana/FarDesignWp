@@ -30,7 +30,7 @@
         endif; ?>
             <p>Tous les documents en relation avec les cours.</p>
             <div class="contentColonne">
-                <ol>
+                <ol id="listingRoot">
                     <?php
                     $args = array(
                         'orderby' => 'name',
@@ -102,7 +102,29 @@
                                                                     $attachments = get_posts($args);
                                                                     if ($attachments): foreach ($attachments as $attachment): ?>
 
-                                                                        <a href="<?php echo wp_get_attachment_url($attachment->ID); ?>" title="<?php the_excerpt(); ?>"><?php the_title(); ?></a>
+                                                                        <a href="<?php echo wp_get_attachment_url($attachment->ID); ?>" title="<?php the_excerpt(); ?>">
+                                                                            <?php
+                                                                            $terms = wp_get_post_terms($postIds, 'category_type');
+                                                                            $slug = $terms[0]->slug;
+
+                                                                            if($slug == 'cat-diapo'){ ?>
+                                                                            <span class="icon-docs"></span>
+
+                                                                            <?php }elseif($slug == 'cat-document'){ ?>
+                                                                                <span class="icon-doc-alt"></span>
+
+                                                                            <?php }elseif($slug == 'cat-image'){ ?>
+                                                                                <span class="icon-picture-1"></span>
+
+                                                                            <?php }elseif($slug == 'cat-tableur'){ ?>
+                                                                                <span class="icon-picture-2"></span>
+
+                                                                            <?php }elseif($slug == 'cat-url'){ ?>
+                                                                                <span class="icon-globe-inv"></span>
+
+                                                                            <?php } ?>
+                                                                            <p><?php the_title(); ?></p>
+                                                                        </a>
 
 
                                                                     <?php endforeach;
@@ -123,7 +145,7 @@
                 </ol>
             </div>
 
-            <a href="<?php echo wp_logout_url(home_url()); ?>" title="Logout">Logout</a>
+            <a href="<?php echo wp_logout_url(home_url()); ?>" title="Logout">Se déconnecter</a>
         <?php else: ?>
             <?php if (have_posts()):while (have_posts()):the_post(); ?>
                 <header>
@@ -149,10 +171,11 @@
                 <!-- Voir ce qu'on fait dans ce cas-ci <a href="http://www.NOM_DU_SITE.com/wp-login.php?action=lostpassword">Mot de passe oublié</a>-->
                 <input type="submit" tabindex="100" value="Se connecter" id="wp-submit" name="wp-submit">
 
-                <input type="hidden" value="http://farwp.buffart.eu/cours/" name="redirect_to">
+                <input type="hidden" value="http://farwp.buffart.eu/membres/" name="redirect_to">
             </form>
         <?php
         endif;
         ?>
     </section>
+    <script src="<?php echo get_template_directory_uri(); ?>/js/scriptFar.js" type="text/javascript"></script>
 <?php get_footer() ?>

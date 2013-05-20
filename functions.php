@@ -577,3 +577,13 @@ if (!function_exists('far_setup'))
 
     }
 }
+
+/**
+ * jQuery library
+ */
+function my_init() {
+    if (!is_admin()) {
+        wp_enqueue_script('jquery');
+    }
+}
+add_action('init', 'my_init');

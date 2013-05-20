@@ -1,7 +1,6 @@
 (function ($) {
-    var $slider = $('.sliderAccueil figure');
+    var $slider = $('#slider-supported figure');
     var $niveau = $('.niveau');
-    var $submenu = $('.submenu');
     var delay = 7000;
 
     //Slider accueil
@@ -30,16 +29,23 @@
         });
     };
 
+    //
+
+
     //Show Thematique
-    var toggleYear = function (e) {
+    var showYear = function (e) {
         e.stopPropagation(); // Prevent parent DOM tree element events to be propagated
-        $(e.target).parents('.year').find('ol').toggle();
+        var $thematiques = $(e.target).parents('.year').find('ol');
+        $('#listingRoot .year > ol:visible').not($thematiques).hide();
+        $thematiques.toggle();
     };
 
     //Show documents
-    var toggleThematique = function (e) {
+    var showThematique = function (e) {
         e.stopPropagation(); // Prevent parent DOM tree element events to be propagated
-        $(e.target).parents('.thematique').find('ul').toggle();
+        var $documents = $(e.target).parents('.thematique').find('ul');
+        $('#listingRoot .thematique > ul:visible').not($documents).hide();
+        $documents.toggle();
 
     };
 
@@ -50,12 +56,15 @@
         $niveau.find('.year ol').hide();
         $niveau.find('.thematique ul').hide();
 
-        $niveau.find('.year').click(toggleYear);
-        $niveau.find('.thematique').click(toggleThematique);
+        $niveau.find('.year').click(showYear);
+        $niveau.find('.thematique').click(showThematique);
 
         setInterval(switchImg, delay);
         $('.precedent').on('click', previousImg);
         $('.suivant').on('click', switchImg);
+
+        $('#slider-not-supported').hide();
+        $('#slider-supported').show();
     });
 
 })(jQuery);

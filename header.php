@@ -58,7 +58,7 @@
     <link rel="stylesheet" type="text/css" media="all" href="<?php echo get_template_directory_uri(); ?>/fontello/fontello-embedded.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="<?php echo get_template_directory_uri(); ?>/fontello/fontello-ie7-codes.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="<?php echo get_template_directory_uri(); ?>/fontello/fontello-ie7.css"/>
-    <link rel="stylesheet" type="text/css" media="all" href="<?php echo get_template_directory_uri(); ?>/fontello/fontello.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo get_template_directory_uri(); ?>/fontello/fontello.less"/>
 
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 
