@@ -587,3 +587,8 @@ function my_init() {
     }
 }
 add_action('init', 'my_init');
+
+/**
+ * Remove toolbar
+ */
+add_filter( 'show_admin_bar', '__return_false' );

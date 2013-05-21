@@ -10,13 +10,11 @@
             the_post();
             ?>
             <figure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
-
-                <figcaption>
-                    <h3><?php the_title(); ?></h3>
-                </figcaption>
+            </figure>
                 <?php endwhile;
                 endif;
                 wp_reset_query(); ?>
+
         </div>
     </header>
     <section>
@@ -41,39 +39,54 @@
                     $terms = wp_get_post_terms($id_post, 'category_publication');
                     $slug = $terms[0]->slug;
 
-                    if($slug == 'cat-video'){ ?>
+                    if ($slug == 'cat-video')
+                    {
+                        ?>
                         <span class="icon-videocam"></span>
 
-                    <?php }elseif($slug == 'cat-blog'){ ?>
+                    <?php
+                    } elseif ($slug == 'cat-blog')
+                    {
+                        ?>
                         <span class="icon-edit"></span>
 
-                     <?php }elseif($slug == 'cat-journal'){ ?>
+                    <?php
+                    } elseif ($slug == 'cat-journal')
+                    {
+                        ?>
                         <span class="icon-book-open"></span>
 
-                    <?php }elseif($slug == 'cat-documentation'){ ?>
+                    <?php
+                    } elseif ($slug == 'cat-documentation')
+                    {
+                        ?>
                         <span class="icon-folder-open"></span>
 
                     <?php } ?>
                     <h3><?php the_title(); ?></h3>
                 </header>
-                <p>
+                <div>
                     <?php the_content(); ?>
-                </p>
-
-                <p>
-
-                </p>
-                <figure>
+                </div>
+                <?php
+                if (has_post_thumbnail(get_the_ID())): ?>
                     <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>">
-                        <?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
-                        <figcaption><?php echo get_post_meta(get_the_ID(), 'title_link', true); ?></figcaption>
+                        <figure>
+                            <?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
+                            <figcaption><?php echo get_post_meta(get_the_ID(), 'title_link', true); ?></figcaption>
+                        </figure>
                     </a>
-                </figure>
+                <?php else: ?>
+                <p class="linkPubli">
+                    <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>"><?php echo get_post_meta(get_the_ID(), 'title_link', true); ?></a>
+                </p>
+                <?php endif; ?>
             </div>
         <?php endwhile;
         endif;
         wp_reset_query(); ?>
     </div>
+    </section>
 <?php endwhile;
 endif; ?>
 <?php get_footer(); ?>

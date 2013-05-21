@@ -14,33 +14,10 @@
 
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
-    <meta name="Author"
-          content="abDesign"/>
-    <meta name="Keywords"
-          content="Far, Form'action André Renard, Formations, André Renard, Liège, FGTB"/>
-    <meta name="Description"
-          content="Site de la Form'action André Renard"/>
-
-    <meta http-equiv="Content-Language"
-          content="fr"/>
-    <meta name="DC.Language"
-          content="fr"/>
-    <meta name="DC.Creator"
-          content="Buffart Annabelle"/>
-    <meta name="DC.Date.modified"
-          scheme="W3CDTF"
-          content="25/01/2013"/>
 
     <title>
-        <?php
-        wp_title('|', true, 'right');
-        $site_description = get_bloginfo('description', 'display');
-        $site_title = get_bloginfo('name');
-        if ($site_description && (is_home() || is_front_page()))
-        {
-            echo "$site_title | $site_description";
-        }
-        ?></title>
+        <?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(''); ?>
+    </title>
 
     <!-- Google Chrome Frame for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -70,8 +47,7 @@
 <header class="header" role="banner">
     <!-- to use a image just replace the bloginfo('name') with your img src and remove the surrounding <p> -->
     <div class="banner">
-
-        <a class="logo" href="<?php echo home_url(); ?>" rel="nofollow"><img src="http://farwp.buffart.eu/wp-content/uploads/2013/05/headerBis3.png" title="Logo de la FAR" alt="logo"/>
+        <a class="logo" href="<?php echo home_url(); ?>" rel="nofollow"><img src="http://farwp.buffart.eu/wp-content/uploads/2013/05/logoFar.png" title="Logo de la FAR" alt="logo"/>
 
             <h1 class="h1"><?php bloginfo('description'); ?></h1>
         </a>

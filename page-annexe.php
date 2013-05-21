@@ -7,16 +7,14 @@
             <?php
             query_posts(array('post_type' => 'autre_image', 'category_image' => 'cat-annexe', 'posts_per_page' => 1));
             if (have_posts()):while (have_posts()):
-            the_post();
-            ?>
-            <figure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
+                the_post();
+                ?>
+                <figure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
+                </figure>
+            <?php endwhile;
+            endif;
+            wp_reset_query(); ?>
 
-                <figcaption>
-                    <h3><?php the_title(); ?></h3>
-                </figcaption>
-                <?php endwhile;
-                endif;
-                wp_reset_query(); ?>
         </div>
     </header>
     <section>
@@ -28,6 +26,7 @@
                 </h2>
             </header>
             <div class="contentColonne">
+                <h3 class="titleDisplay">Nos objectifs et notre méthodologie</h3>
                 <?php the_content(); ?>
             </div>
             <figure>

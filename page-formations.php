@@ -10,13 +10,11 @@
             the_post();
             ?>
             <figure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
-
-                <figcaption>
-                    <h3><?php the_title(); ?></h3>
-                </figcaption>
+            </figure>
                 <?php endwhile;
                 endif;
                 wp_reset_query(); ?>
+
         </div>
     </header>
     <section>
@@ -28,6 +26,7 @@
         </h2>
     </header>
     <div class="contentColonne">
+        <h3 class="titleDisplay">Notre organisation</h3>
         <?php the_content(); ?>
     </div>
     <figure>

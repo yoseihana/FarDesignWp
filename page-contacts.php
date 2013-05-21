@@ -7,14 +7,12 @@
             if (have_posts()):while (have_posts()):
             the_post();
             ?>
-            <fiigure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
-
-                <figcaption>
-                    <h3><?php the_title(); ?></h3>
-                </figcaption>
+            <figure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
+            </figure>
                 <?php endwhile;
                 endif;
                 wp_reset_query(); ?>
+
         </div>
     </header>
     <section>
@@ -75,7 +73,7 @@
             </h2>
         </header>
         <?php
-        query_posts(array('post_type' => 'equipe', 'orderby' => 'menu_order', 'order' => 'ASC','posts_per_page'=>20));
+        query_posts(array('post_type' => 'equipe', 'orderby' => 'menu_order', 'order' => 'ASC', 'posts_per_page' => 20));
         if (have_posts()):while (have_posts()):
             the_post();
             ?>
@@ -84,6 +82,7 @@
                 <figure><?php the_post_thumbnail('thumbnail', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?></figure>
                 <p class="poste"><?php echo get_post_meta(get_the_ID(), 'poste_equipe', true); ?></p>
                 <h4>Email(s)</h4>
+
                 <p class="email"><?php echo get_post_meta(get_the_ID(), 'contact_email1', true); ?></p>
 
                 <p class="email"><?php echo get_post_meta(get_the_ID(), 'contact_email2', true); ?></p>

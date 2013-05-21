@@ -2,19 +2,19 @@
     <ul>
         <?php
 
-        query_posts(array('post_type' => 'links', 'category_link'=>'bas-page', 'posts-per-page'=>3, 'orderby'=>'menu_order', 'order'=>'ASC'));
+        query_posts(array('post_type' => 'links', 'category_link' => 'bas-page', 'posts-per-page' => 3, 'orderby' => 'menu_order', 'order' => 'ASC'));
         if (have_posts()):while (have_posts()):the_post();
-        ?>
-        <li>
-            <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>"><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?></a>
-        </li>
+            ?>
+            <li>
+                <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>"><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?></a>
+            </li>
         <?php endwhile; endif;
         wp_reset_query(); ?>
     </ul>
 </footer>
 </div>
 <!-- end .content -->
-<h2 class="noDisplay" style="display: none">Informations complémentaires</h2>
+<h2 class="titleDisplay">Informations complémentaires</h2>
 <footer class="footer">
     <div class="banner">
         <div>
@@ -38,7 +38,8 @@
 
             <form action="#" method="post">
                 <fieldset>
-                    <label for="newsletterEmail">S'inscrire à notre newsletter</label>
+                    <legend>S'inscrire à notre newsletter</legend>
+                    <label for="newsletterEmail">Votre email:</label>
                     <input type="email" placeholder="Votre email" id="newsletterEmail"/>
                     <input type="submit" value="S'inscrire" name="S'inscrire"/>
                 </fieldset>
@@ -66,7 +67,7 @@
             if (have_posts()):while (have_posts()):the_post();
                 ?>
                 <h3><?php echo get_post_meta(get_the_ID(), 'contact_map_title', true); ?></h3>
-                <div><?php echo get_post_meta(get_the_ID(), 'contact_map', true); ?></div>
+                <div class="gmap"><?php echo get_post_meta(get_the_ID(), 'contact_map', true); ?></div>
             <?php endwhile; endif;
             wp_reset_query(); ?>
         </div>
@@ -76,8 +77,5 @@
         <p>© <?php the_time('Y'); ?> - Tous droits réservés / <?php bloginfo('description'); ?> / Design <?php the_author_link(); ?></p>
     </div>
 </footer>
-<!--<script src = "http://code.jquery.com/jquery-1.9.0.min.js" ></script > -->
-<!--<script src="./js/jquery.js" type="text/javascript"></script>
-<script src="js/scriptFar.js" type="text/javascript"></script>-->
 </body >
 </html >

@@ -5,16 +5,12 @@
                 <?php
                 query_posts(array('post_type' => 'autre_image', 'category_image' => 'cat-archives', 'posts_per_page' => 1));
                 if (have_posts()):while (have_posts()):
-                the_post();
-                ?>
-                <fiigure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
-
-                    <figcaption>
-                        <h3><?php the_title(); ?></h3>
-                    </figcaption>
-                    <?php endwhile;
-                    endif;
-                    wp_reset_query(); ?>
+                    the_post();
+                    ?>
+                    <figure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?></figure>
+                <?php endwhile;
+                endif;
+                wp_reset_query(); ?>
             </div>
         </header>
         <section class="contentColonne">
@@ -22,9 +18,9 @@
             {
                 ?>
                 <header>
-                    <h1 class="archive-title h2">
+                    <h2 class="archive-title h2">
                         Archives <?php single_cat_title(); ?>
-                    </h1>
+                    </h2>
                 </header>
             <?php
             } elseif (is_year())
@@ -43,6 +39,7 @@
                     <div class="entry-content page">
                         <header class="posted article-header">
                             <h3><?php the_title(); ?></h3>
+
                             <p class="category">Catégories: <?php the_category(', '); ?></p>
                         </header>
                         <!-- end article header -->

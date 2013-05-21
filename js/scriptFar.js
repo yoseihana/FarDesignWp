@@ -1,6 +1,6 @@
 (function ($) {
     var $slider = $('#slider-supported figure');
-    var $niveau = $('.niveau');
+    var $niveau = $('.level');
     var delay = 7000;
 
     //Slider accueil
@@ -43,8 +43,8 @@
     //Show documents
     var showThematique = function (e) {
         e.stopPropagation(); // Prevent parent DOM tree element events to be propagated
-        var $documents = $(e.target).parents('.thematique').find('ul');
-        $('#listingRoot .thematique > ul:visible').not($documents).hide();
+        var $documents = $(e.target).parents('.subject').find('ul');
+        $('#listingRoot .subject > ul:visible').not($documents).hide();
         $documents.toggle();
 
     };
@@ -54,10 +54,10 @@
         $slider.not(":first").hide();
 
         $niveau.find('.year ol').hide();
-        $niveau.find('.thematique ul').hide();
+        $niveau.find('.subject ul').hide();
 
         $niveau.find('.year').click(showYear);
-        $niveau.find('.thematique').click(showThematique);
+        $niveau.find('.subject').click(showThematique);
 
         setInterval(switchImg, delay);
         $('.precedent').on('click', previousImg);

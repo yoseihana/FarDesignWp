@@ -5,30 +5,24 @@
         <?php
         query_posts(array('post_type' => 'autre_image', 'category_image' => 'cat-espace-membres', 'posts_per_page' => 1));
         if (have_posts()):while (have_posts()):
-        the_post();
-        ?>
-        <figure><?php
-            $thumb_id = get_post_thumbnail_id($post->ID);
-            $thumb_title = get_the_title($thumb_id);
-            the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
+            the_post();
+            ?>
+            <figure><?php
+                $thumb_id = get_post_thumbnail_id($post->ID);
+                $thumb_title = get_the_title($thumb_id);
+                the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
 
-            <figcaption>
-                <h3><?php the_title(); ?></h3>
-            </figcaption>
-            <?php endwhile;
-            endif;
-            wp_reset_query(); ?>
+            </figure>
+        <?php endwhile;
+        endif;
+        wp_reset_query(); ?>
     </div>
 </header>
 
 
 <section>
     <?php
-    if (is_user_logged_in()):
-    if (have_posts()):while (have_posts()):
-        the_post(); ?>
-    <?php endwhile;
-    endif; ?>
+    if (is_user_logged_in()): ?>
     <header>
         <h2><?php the_title(); ?></h2>
     </header>
@@ -38,54 +32,59 @@
     <div class="contentColonne">
         <ol id="listingRoot">
             <?php
-            $args = array(
+            $argsLevel = array(
                 'orderby' => 'name',
                 'parent' => 0,
                 'type' => 'documents',
                 'hide_empty' => 0,
                 'taxonomy' => 'category_cours'
             );
-            $categories = get_categories($args);
-            foreach ($categories as $category):
+            $catLevels = get_categories($argsLevel);
+            foreach ($catLevels as $catLevel):
 
                 ?>
-                <li class="niveau">
+                <li class="level">
                     <div>
-                        <h3 id="<?php echo $category->slug; ?>"><?php echo $category->name; ?></h3>
+                        <h3 id="<?php echo $catLevel->slug; ?>"><?php echo $catLevel->name; ?></h3>
                     </div>
                     <ol>
                         <?php
-                        $arg2 = array(
+                        $argYear = array(
                             'orderby' => 'name',
                             'parent' => 0,
                             'type' => 'documents',
                             'hide_empty' => 0,
                             'taxonomy' => 'category_cours',
-                            'child_of' => $category->cat_ID,
-                            'parent' => $category->cat_ID,
+                            'child_of' => $catLevel->cat_ID,
+                            'parent' => $catLevel->cat_ID,
                         );
-                        $categories2 = get_categories($arg2);
-                        foreach ($categories2 as $category2):?>
+                        $catYears = get_categories($argYear);
+                        foreach ($catYears as $catYear):?>
                             <li class="year">
                                 <div>
-                                    <h4><?php echo $category2->name; ?></h4>
+                                    <h4><?php echo $catYear->name; ?></h4>
                                 </div>
                                 <ol>
                                     <?php
-                                    $arg3 = array(
+                                    $argSubject = array(
                                         'orderby' => 'name',
                                         'parent' => 0,
                                         'type' => 'documents',
                                         'hide_empty' => 0,
                                         'taxonomy' => 'category_cours',
-                                        'child_of' => $category2->cat_ID,
-                                        'parent' => $category2->cat_ID,
+                                        'child_of' => $catYear->cat_ID,
+                                        'parent' => $catYear->cat_ID,
                                     );
-                                    $categories3 = get_categories($arg3);
-                                    foreach ($categories3 as $category3):?>
-                                        <li class="thematique">
+                                    $catSubjects = get_categories($argSubject);
+                                    foreach ($catSubjects as $catSubject):
+                                        ?>
+                                        <li class="subject">
                                             <div>
-                                                <h5><?php echo $category3->name; ?></h5>
+                                                <h5><?php echo $catSubject->name;
+                                                    if ($catSubject->count >= 1)
+                                                    {
+                                                        echo '<em>' . $catSubject->count . '</em>';
+                                                    } ?></h5>
                                             </div>
                                             <ul>
                                                 <?php query_posts(array(
@@ -94,7 +93,7 @@
                                                         array(
                                                             'taxonomy' => 'category_cours',
                                                             'field' => 'slug',
-                                                            'terms' => $category3->slug
+                                                            'terms' => $catSubject->slug
                                                         )
                                                     )
                                                 ));
@@ -104,8 +103,8 @@
                                                     <li>
                                                         <p><?php $postIds = get_the_ID();
 
-                                                            $args = array('post_type' => 'attachment', 'numberposts' => -1, 'post_status' => 'any', 'post_parent' => $postIds);
-                                                            $attachments = get_posts($args);
+                                                            $argAttchment = array('post_type' => 'attachment', 'numberposts' => -1, 'post_status' => 'any', 'post_parent' => $postIds);
+                                                            $attachments = get_posts($argAttchment);
                                                             if ($attachments): foreach ($attachments as $attachment):
 
                                                                 $excerptDoc = get_the_excerpt();
@@ -169,7 +168,7 @@
         </ol>
     </div>
 
-    <a id="logOut" href="<?php echo wp_logout_url(home_url()); ?>" title="Logout">Se déconnecter</a>
+    <a id="logOut" href="<?php echo wp_logout_url('membres'); ?>" title="Logout">Se déconnecter</a>
 </section>
 <aside>
     <h2 class="titleDisplay">Racourcis des nouveaux et derniers cours ajoutés</h2>
@@ -251,9 +250,8 @@
             <label><input type="checkbox" tabindex="90" value="forever" id="rememberme" name="rememberme">Rester connecter</label>
 
             <!-- Voir ce qu'on fait dans ce cas-ci <a href="http://www.NOM_DU_SITE.com/wp-login.php?action=lostpassword">Mot de passe oublié</a>-->
-            <input type="submit" tabindex="100" value="Se connecter" id="wp-submit" name="wp-submit">
 
-            <input type="hidden" value="http://farwp.buffart.eu/membres/" name="redirect_to">
+            <input type="hidden" value="<?php echo bloginfo('url'); ?>/membres/" name="redirect_to">
         </fieldset>
     </form>
     </section>

@@ -10,10 +10,6 @@
             the_post();
             ?>
             <figure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
-
-                <figcaption>
-                    <h3><?php the_title(); ?></h3>
-                </figcaption>
                 <?php endwhile;
                 endif;
                 wp_reset_query(); ?>
