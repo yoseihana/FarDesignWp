@@ -108,7 +108,7 @@
     <aside>
         <h2 class="titleDisplay">A propose des réalisateurs</h2>
 
-        <div class="autresFilms">
+        <div>
             <header>
                 <span class="icon-video"></span>
 
@@ -126,13 +126,13 @@
                     </li>
                 <?php endforeach; ?>
                 <li>
-                    <a href="http://www.far.be/vitrinevideo/2011.html">Archives 2011</a>
+                    <a href="http://www.far.be/vitrinevideo/2011.html">Archives 2011 <span class="icon-link-ext"></span></a>
                 </li>
                 <li>
-                    <a href="http://www.far.be/vitrinevideo/2010.html">Archives 2010</a>
+                    <a href="http://www.far.be/vitrinevideo/2010.html">Archives 2010 <span class="icon-link-ext"></span></a>
                 </li>
                 <li>
-                    <a href="http://www.far.be/vitrinevideo/archives.html">Archives antérieurs à 2010</a>
+                    <a href="http://www.far.be/vitrinevideo/archives.html">Archives antérieurs à 2010 <span class="icon-link-ext"></span></a>
                 </li>
             </ol>
         </div>

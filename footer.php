@@ -26,7 +26,7 @@
         <div>
             <?php
 
-            query_posts(array('post_type' => 'horaire'));
+            query_posts(array('post_type' => 'horaire', 'category_horaire'=>'cat-bas'));
             if (have_posts()):while (have_posts()):the_post();
                 ?>
                 <h3><?php the_title(); ?></h3>
@@ -36,14 +36,7 @@
             <?php endwhile; endif;
             wp_reset_query(); ?>
 
-            <form action="#" method="post">
-                <fieldset>
-                    <legend>S'inscrire à notre newsletter</legend>
-                    <label for="newsletterEmail">Votre email:</label>
-                    <input type="email" placeholder="Votre email" id="newsletterEmail"/>
-                    <input type="submit" value="S'inscrire" name="S'inscrire"/>
-                </fieldset>
-            </form>
+            <script type="text/javascript" src="http://signup.ymlp.com/signup.js?id=gbeeqwbgmgj"></script>
         </div>
         <div>
             <?php
@@ -77,5 +70,6 @@
         <p>© <?php the_time('Y'); ?> - Tous droits réservés / <?php bloginfo('description'); ?> / Design <?php the_author_link(); ?></p>
     </div>
 </footer>
+
 </body >
 </html >

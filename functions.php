@@ -73,6 +73,13 @@ if (!function_exists('add_taxonomies'))
             'query_var' => true,
             'rewrite' => true
         ));
+
+        register_taxonomy('category_horaire', 'horaire', array(
+            'label' => 'Catégorie horaire',
+            'hierarchical' => true,
+            'query_var' => true,
+            'rewrite' => true
+        ));
     }
 }
 

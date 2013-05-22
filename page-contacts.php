@@ -5,13 +5,13 @@
             <?php
             query_posts(array('post_type' => 'autre_image', 'category_image' => 'cat-contact', 'posts_per_page' => 1));
             if (have_posts()):while (have_posts()):
-            the_post();
-            ?>
-            <figure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
-            </figure>
-                <?php endwhile;
-                endif;
-                wp_reset_query(); ?>
+                the_post();
+                ?>
+                <figure><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
+                </figure>
+            <?php endwhile;
+            endif;
+            wp_reset_query(); ?>
 
         </div>
     </header>
@@ -32,32 +32,55 @@
         <?php endwhile; endif; ?>
     </section>
     <aside>
-        <?php
-        query_posts(array('post_type' => 'contact', 'category_contact' => 'page-contact', 'posts_per_page' => 1));
-        if (have_posts()):while (have_posts()):
-            the_post();
-            ?>
-            <header>
-                <h2 style="display: none;">Nos coordonnées</h2>
-                <span class="icon-mail"></span>
+        <div>
+            <?php
+            query_posts(array('post_type' => 'contact', 'category_contact' => 'page-contact', 'posts_per_page' => 1));
+            if (have_posts()):while (have_posts()):
+                the_post();
+                ?>
+                <header>
+                    <h2 class="titleDisplay">Nos coordonnées</h2>
+                    <span class="icon-mail"></span>
 
+                    <h3><?php the_title(); ?></h3>
+                </header>
+                <p><?php echo get_post_meta(get_the_ID(), 'contact_title', true); ?><p>
+
+                <p><?php echo get_post_meta(get_the_ID(), 'contact_street', true) . ' ' . get_post_meta(get_the_ID(), 'contact_number', true); ?></p>
+
+                <p><?php echo get_post_meta(get_the_ID(), 'contact_cp', true) . ' ' . get_post_meta(get_the_ID(), 'contact_town', true); ?></p>
+                <dl>
+                    <dt>Téléphone</dt>
+                    <dd><?php echo get_post_meta(get_the_ID(), 'contact_phone', true); ?></dd>
+                    <dt>Fax</dt>
+                    <dd><?php echo get_post_meta(get_the_ID(), 'contact_fax', true); ?></dd>
+                    <dt>Email</dt>
+                    <dd><?php echo get_post_meta(get_the_ID(), 'contact_email1', true); ?></dd>
+                </dl>
+            <?php endwhile; endif;
+            wp_reset_query(); ?>
+        </div>
+        <div>
+            <header>
+                <h2 class="titleDisplay">Horaire du centre de documentation</h2>
+                <span class="icon-clock"></span>
+                <?php
+                query_posts(array('post_type' => 'horaire', 'category_horaire' => 'cat-page-contact', 'orderby' => 'name'));
+                if (have_posts()):while (have_posts()):
+                the_post();
+                ?>
                 <h3><?php the_title(); ?></h3>
             </header>
-            <p><?php echo get_post_meta(get_the_ID(), 'contact_title', true); ?><p>
+            <p><?php echo get_post_meta(get_the_ID(), 'horaire_day', true); ?></p>
 
-            <p><?php echo get_post_meta(get_the_ID(), 'contact_street', true) . ' ' . get_post_meta(get_the_ID(), 'contact_number', true); ?></p>
+            <p><?php echo get_post_meta(get_the_ID(), 'horaire_hour', true) ?></p>
 
-            <p><?php echo get_post_meta(get_the_ID(), 'contact_cp', true) . ' ' . get_post_meta(get_the_ID(), 'contact_town', true); ?></p>
-            <dl>
-                <dt>Téléphone</dt>
-                <dd><?php echo get_post_meta(get_the_ID(), 'contact_phone', true); ?></dd>
-                <dt>Fax</dt>
-                <dd><?php echo get_post_meta(get_the_ID(), 'contact_fax', true); ?></dd>
-                <dt>Email</dt>
-                <dd><?php echo get_post_meta(get_the_ID(), 'contact_email1', true); ?></dd>
-            </dl>
-        <?php endwhile; endif;
-        wp_reset_query(); ?>
+            <p><?php echo get_post_meta(get_the_ID(), 'horaire_close', true) ?></p>
+
+            <?php endwhile;
+            endif;
+            wp_reset_query(); ?>
+        </div>
         <form action="#" method="post">
             <fieldset>
                 <label for="newsletter">S'inscrire à notre newsletter</label>
