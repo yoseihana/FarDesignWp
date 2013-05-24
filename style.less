@@ -16,24 +16,48 @@
 //Fonts
 @font-face {
   font-family: 'SourceSansProBold';
-  src: url('Fonts/SourceSansPro-Bold-webfont.eot');
-  src: url('Fonts/SourceSansPro-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('Fonts/SourceSansPro-Bold-webfont.woff') format('woff'), url('Fonts/SourceSansPro-Bold-webfont.ttf') format('truetype'), url('Fonts/SourceSansPro-Bold-webfont.svg#SourceSansProBold') format('svg');
+  src: url('fonts/SourceSansPro-Bold-webfont.eot');
+  src: url('fonts/SourceSansPro-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/SourceSansPro-Bold-webfont.woff') format('woff'), url('fonts/SourceSansPro-Bold-webfont.ttf') format('truetype'), url('fonts/SourceSansPro-Bold-webfont.svg#SourceSansProBold') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SourceSansProLight';
-  src: url('Fonts/SourceSansPro-Light-webfont.eot');
-  src: url('Fonts/SourceSansPro-Light-webfont.eot?#iefix') format('embedded-opentype'), url('Fonts/SourceSansPro-Light-webfont.woff') format('woff'), url('Fonts/SourceSansPro-Light-webfont.ttf') format('truetype'), url('Fonts/SourceSansPro-Light-webfont.svg#SourceSansProLight') format('svg');
+  src: url('fonts/SourceSansPro-Light-webfont.eot');
+  src: url('fonts/SourceSansPro-Light-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/SourceSansPro-Light-webfont.woff') format('woff'), url('fonts/SourceSansPro-Light-webfont.ttf') format('truetype'), url('fonts/SourceSansPro-Light-webfont.svg#SourceSansProLight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SourceSansProLightItalic';
+  src: url('fonts/SourceSansPro-LightIt-webfont.eot');
+  src: url('fonts/SourceSansPro-LightIt-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/SourceSansPro-LightIt-webfont.woff') format('woff'), url('fonts/SourceSansPro-LightIt-webfont.ttf') format('truetype'), url('fonts/SourceSansPro-LightIt-webfont.svg#SourceSansProLightItalic') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SourceSansProRegular';
-  src: url('Fonts/SourceSansPro-Regular-webfont.eot');
-  src: url('Fonts/SourceSansPro-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('Fonts/SourceSansPro-Regular-webfont.woff') format('woff'), url('Fonts/SourceSansPro-Regular-webfont.ttf') format('truetype'), url('Fonts/SourceSansPro-Regular-webfont.svg#SourceSansProRegular') format('svg');
+  src: url('fonts/SourceSansPro-Regular-webfont.eot');
+  src: url('fonts/SourceSansPro-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/SourceSansPro-Regular-webfont.woff') format('woff'), url('fonts/SourceSansPro-Regular-webfont.ttf') format('truetype'), url('fonts/SourceSansPro-Regular-webfont.svg#SourceSansProRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AmaranthBold';
+  src: url('fonts/Amaranth-Bold-webfont.eot');
+  src: url('fonts/Amaranth-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/Amaranth-Bold-webfont.woff') format('woff'), url('fonts/Amaranth-Bold-webfont.ttf') format('truetype'), url('fonts/Amaranth-Bold-webfont.svg#AmaranthBold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AmaranthItalic';
+  src: url('fonts/Amaranth-Italic-webfont.eot');
+  src: url('fonts/Amaranth-Italic-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/Amaranth-Italic-webfont.woff') format('woff'), url('fonts/Amaranth-Italic-webfont.ttf') format('truetype'), url('fonts/Amaranth-Italic-webfont.svg#AmaranthItalic') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -41,6 +65,9 @@
 @proRegular: 'SourceSansProRegular', Arial, sans-serif;
 @proBold: 'SourceSansProBold', Arial, sans-serif;
 @proLight: 'SourceSansProLight', Arial, sans-serif;
+@proLightIt: 'SourceSansProLightItalic', Arial, sans-serif;
+@aramanthBold: 'AmaranthBold', Arial, sans-serif;
+@aramanthIt: 'AmaranthItalic', Arial, sans-serif;
 
 //Colors
 @deepGrey: #373737;
@@ -64,7 +91,7 @@
 
 ;
 @y: 0;
-@blur: 5px;
+@blur: 10px;
 @color: @lightGrey)
 {
   box-shadow: @arguments
@@ -89,8 +116,11 @@
 }
 
 /*
-* Hack Safari et Chrome
+* Pour IE et hack IE
 */
+.imageIE {
+  width: 45px;
+}
 
 /*
 * COMMON CONTENT
@@ -100,6 +130,7 @@ body {
   font-size: 16px;
   font-family: @proRegular;
   margin: 0px auto;
+  background-image: url('/images/bkg_body.png');
 }
 
 .titleDisplay {
@@ -110,11 +141,28 @@ ul, ol {
   margin-bottom: 1em;
 }
 
+em {
+  font-family: @proLightIt;
+  margin-top: 0.5em;
+  display: inline-block;
+
+}
+
+blockquote {
+  margin: 0 2em;
+
+  p {
+    font-family: @aramanthIt;
+    color: @lightBlue;
+  }
+}
+
 h2 {
-  font-family: @proBold;
+  font-family: @aramanthBold;
   margin-bottom: .5em;
   font-size: 2em;
   color: @lightRed;
+  letter-spacing: 1px;
 }
 
 a {
@@ -132,10 +180,12 @@ a {
 }
 
 h3 {
-  font-family: @proBold;
+  font-family: @aramanthBold;
   font-size: 1.5em;
   margin-top: .5em;
   color: @deepBlue;
+  clear: both;
+  letter-spacing: 1px;
 }
 
 p {
@@ -143,18 +193,36 @@ p {
   line-height: 1.25em;
   margin-bottom: 1em;
   font-family: @proLight;
+  font-size: 1.25em;
+}
+
+input:focus {
+  border-color: rgba(9, 96, 153, 0.8);
+  outline: 0;
+  outline: thin dotted 9;
+  -webkit-box-shadow: inset 0 5px 5px rgba(0, 0, 0, 0.075), 5px 5px 25px rgba(6, 31, 64, 0.6);
+  -moz-box-shadow: inset 0 5px 5px rgba(0, 0, 0, 0.075), 5px 5px 25px rgba(6, 31, 64, 0.6);
+  box-shadow: inset 0 5px 5px rgba(0, 0, 0, 0.075), 5px 5px 25px rgba(6, 31, 64, 0.6);
+}
+
+aside, #contactForm, .liens img{
+    .box-shadow(1px; 1px);
 }
 
 .header, .footer {
   clear: both;
   height: 125px;
   width: 100%;
-  background-color: @deepGrey;
+  background-image: url('./images/bkg_fo_he.png');
   color: white;
 
   .banner {
     width: 960px;
     margin: 0 auto;
+  }
+
+  p{
+    font-size: 1em;
   }
 
   a {
@@ -187,7 +255,7 @@ p {
       color: #fff;
       .column(8);
       margin-top: 1em;
-      font-family: 'SourceSansProBold', Arial, sans-serif;
+      font-family: @aramanthBold;
       font-size: 1em;
     }
   }
@@ -203,6 +271,7 @@ p {
       position: relative;
       font-family: @proBold;
       margin-bottom: 1em;
+      letter-spacing: 0.5px;
 
       &:before {
         content: '|';
@@ -221,7 +290,7 @@ p {
       }
     }
 
-    a{
+    a {
       font-family: @proBold;
     }
 
@@ -236,6 +305,18 @@ p {
 .footer {
   border-top: 5px solid #cfcfcf;
   height: 100%;
+
+  input[type="submit"] {
+    height: 25px;
+    border-color: @lightGrey;
+    .column(12);
+  }
+
+  input[type="text"] {
+    height: 25px;
+    width: 200px;
+    border-color: @lightGrey;
+  }
 
   .banner div {
     .column(3);
@@ -280,9 +361,10 @@ p {
     border-bottom: 1px solid #096099;
     padding: 0.5em;
     margin-bottom: 0.5em;
-    font-family: @proBold;
+    font-family: @aramanthBold;
     color: white;
     font-size: 1em;
+    letter-spacing: 2px;
   }
 
   p {
@@ -328,7 +410,7 @@ fieldset {
   input[type="submit"] {
     .column(6);
     .push(6);
-    height: 25px;
+    height: 35px;
     color: @deepGrey;
     background-color: @lightGrey;
     .radius-corners(6px);
@@ -344,8 +426,10 @@ fieldset {
   }
 
   input[type='email'], input[type='text'], input[type="email"], input[type="tel"], input[type="password"] {
-    height: 25px;
+    height: 35px;
     width: 200px;
+    padding: 0 1em;
+    font-size: 0.75em;
     margin-bottom: 1.5em;
     border: 1px @deepGrey solid;
     display: block;
@@ -354,7 +438,9 @@ fieldset {
 
   textarea {
     border: 1px @deepGrey solid;
-    width: 98%;
+    width: 95%;
+    font-size: 0.75em;
+    padding: 0.5em 1em;
     .radius-corners()
   }
 
@@ -377,6 +463,11 @@ body .sliderAccueil {
   figcaption {
     top: 175px;
     width: 150px;
+
+    p {
+      font-family: @proRegular;
+      font-size: 1em;
+    }
   }
 }
 
@@ -403,7 +494,7 @@ body .sliderAccueil {
     }
 
     h3 {
-      font-family: @proBold;
+      font-family: @aramanthBold;
       margin-bottom: .5em;
       font-size: 1.25em;
       color: @lightRed;
@@ -435,6 +526,7 @@ body .sliderAccueil {
     left: 25px;
     width: 200px;
     background-color: rgba(255, 255, 255, 0.8);
+    background-color: #fff\9; /* Cible IE9 et toutes les versions inférieures */
     padding: 1em;
     color: @deepBlue;
     line-height: 1.25em;
@@ -446,7 +538,7 @@ body .sliderAccueil {
     }
 
     h3 {
-      font-family: @proBold;
+      font-family: @aramanthBold;
       margin-bottom: .5em;
       margin-top: 0em;
       font-size: 1.25em;
@@ -520,11 +612,6 @@ section {
       text-align: center;
       margin: 2em 0 1em 0;
     }
-
-    img {
-      .box-shadow(5px;
-      5px);
-    }
   }
 }
 
@@ -534,6 +621,7 @@ section {
 .contentColonne {
   .column(8);
   margin-bottom: 1em;
+  margin-left: 0em;
 }
 
 section {
@@ -554,9 +642,10 @@ section {
     line-height: 1.5em;
     margin-left: 2em;
     font-family: @proLight;
+    font-size: 1.25em;
   }
 
-  em, b, strong {
+  b, strong {
     font-family: @proBold;
   }
 }
@@ -566,6 +655,7 @@ h4 {
   margin-top: 1em;
   font-family: @proBold;
   margin-bottom: .5em;
+  font-size: 1.25em;
 }
 
 /*
@@ -598,22 +688,26 @@ h4 {
 
   span {
     color: @deepBlue;
-    .column(2);
+    .column(2.5);
     font-size: 2em;
-    .push(5);
-    .pull(5);
+    .push(4.75);
+    .pull(4.75);
     margin-bottom: 0.25em;
   }
 
-  div{
+  div {
     height: 195px;
   }
 
-  p, header, figure{
+  p{
+    font-size: 1em;
+  }
+
+  p, header, figure {
     margin: 0.5em;
   }
 
-  figure{
+  figure {
     margin: 0px;
   }
 
@@ -625,12 +719,12 @@ h4 {
     border-color: #ffffff;
   }
 
-  .linkPubli{
+  .linkPubli {
     margin-top: 1em;
     text-align: center;
     font-family: @proRegular;
 
-    a{
+    a {
       color: white;
     }
   }
@@ -644,6 +738,9 @@ h4 {
     list-style-type: none;
     margin-left: 0em;
     margin-bottom: 2em;
+    p{
+      font-size: 1em;
+    }
   }
 }
 
@@ -657,27 +754,35 @@ aside {
   div {
     margin-bottom: 1em;
 
-    li span{
+    li span {
       font-size: 0.65em;
       color: white;
-      left: 0px;
-      top: 0px;
-      margin-bottom: 0em;
+      /*margin-bottom: 0em;
+      margin-top: -1.2em;
+      padding-left: 0.5em;*/
+      float: none;
+      width: 100%;
+      margin-left: 0.2em;
     }
+  }
+
+  em {
+    font-size: 0.75em;
+    color: #ffffff;
+    margin-top: 0.75em;
   }
 
   span {
     color: @deepBlue;
-    position: relative;
-    top: .5em;
     font-size: 2.5em;
-    left: 115px;
-    margin-bottom: .5em;
+    .column(2.5);
+    .push(4.75);
+    margin-top: 0.5em;
   }
 
   h3 {
     color: #fff;
-    padding: 1em 1em 0.5em 0.65em;
+    padding: 0.5em 1em 0.5em 0.65em;
   }
 
   ol {
@@ -689,7 +794,7 @@ aside {
     list-style: square;
     margin-left: 1em;
     font-family: @proRegular;
-    font-size: 1.25em;
+    font-size: 1.15em;
     color: @deepBlue;
 
     a {
@@ -702,11 +807,34 @@ aside {
     }
   }
 
+  legend {
+    color: #fff;
+    font-family: @aramanthBold;
+    padding-top: 1em;
+    line-height: 0em;
+  }
+
+  label {
+    margin: .25em 0;
+    color: #fff;
+  }
+
+  input[type="submit"] {
+    border-color: @lightGrey;
+    .column(12);
+  }
+
+  input[type="text"] {
+    width: 240px;
+    border-color: @lightGrey;
+  }
+
   p {
     font-family: @proRegular;
     color: #fff;
     padding: 0.25em 1em 0 1em;
     margin-bottom: 0em;
+    font-size: 1em;
   }
 }
 
@@ -718,7 +846,7 @@ aside {
     margin-bottom: 1em;
   }
 
-  li{
+  li {
     list-style-type: none;
     color: @deepRed;
     font-family: @proRegular;
@@ -732,6 +860,10 @@ aside {
 * CONTACT
 */
 .contentColonne {
+
+  .error {
+    font-family: @proLightIt;
+  }
 
   fieldset {
     border: 1px solid @lightGrey;
@@ -748,6 +880,7 @@ aside {
     label {
       font-family: @proRegular;
       color: white;
+      font-size: 1em;
     }
 
     input[type="text"], input[type="tel"], input[type="email"], textarea {
@@ -763,9 +896,29 @@ aside {
       }
     }
 
+    .homme {
+      font-family: @proLight;
+      input {
+        margin-left: 1em;
+      }
+    }
+
+    .femme {
+      margin-bottom: 1em;
+      font-family: @proLight;
+
+      input {
+        margin-left: 1.35em;
+      }
+    }
+
     li {
       list-style-type: none;
     }
+  }
+
+  #contactForm input[type="email"], input[type="tel"], input[type="text"] {
+    width: 300px;
   }
 }
 
@@ -788,6 +941,7 @@ aside {
 
       dd {
         font-family: @proLight;
+        margin-top: 0.25em;
       }
     }
   }
@@ -805,9 +959,13 @@ aside {
     .column(3);
     height: 400px;
 
-    figure{
+    figure {
       .column(9);
       .push(1.5);
+
+      img {
+        border-bottom: 5px solid @lightGrey;
+      }
     }
 
     h3 {
@@ -818,6 +976,7 @@ aside {
   p {
     margin-bottom: 0;
     clear: both;
+    font-size: 1em;
   }
 }
 
@@ -839,7 +998,7 @@ aside {
     margin-bottom: 2em;
   }
 
-  .description{
+  .description {
     float: none;
     display: block;
   }
@@ -851,6 +1010,7 @@ aside {
 
   h3 {
     margin-top: 0;
+    clear: none;
   }
 
 }
@@ -885,8 +1045,8 @@ aside {
   }
 
   input:-webkit-autofill {
-    background-color: @lightGrey!important;
-    color: @deepBlue!important;
+    background-color: @lightGrey !important;
+    color: @deepBlue !important;
   }
 
   input {
@@ -935,16 +1095,19 @@ aside {
 
     h3 {
       color: white;
-      font-size: 1em;
+      font-size: 0.75em;
       .column(9);
-      padding: .5em;
+      padding: .25em;
+      font-family: @proBold;
     }
 
     h4 {
-      padding: .5em;
+      padding: .25em;
       color: white;
       font-family: @proBold;
       .column(11.5);
+      letter-spacing: 1px;
+      font-size: 0.65em;
 
       &:after {
         content: "+";
@@ -958,6 +1121,8 @@ aside {
       color: @deepRed;
       padding: .5em;
       font-family: @proBold;
+      font-size: 0.5em;
+      line-height: 1em;
 
       &:after {
         content: '+';
@@ -967,10 +1132,10 @@ aside {
         font-family: @proBold;
       }
 
-      em{
-        font-family: @proLight;
-        font-style: italic;
+      em {
         margin-left: 1em;
+        display: inline;
+        font-family: @proLight;
       }
     }
 
@@ -1018,6 +1183,10 @@ aside {
       .column(3);
       height: 150px;
 
+      p{
+        font-size: 0.5em;
+      }
+
       a {
         color: @deepBlue;
       }
@@ -1039,4 +1208,8 @@ section.contentColonne {
 article {
   margin: 1em 0 2em 0;
   border-bottom: 1px solid @lightBlue;
+}
+
+.category{
+  margin-top: 0.25em;
 }

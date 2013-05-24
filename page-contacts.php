@@ -21,9 +21,9 @@
                 <h2><?php the_title(); ?></h2>
             </header>
             <div class="contentColonne">
-                <h3 style="display: none;">Nous contacter via le formulaire</h3>
+                <h3 class="titleDisplay">Nous contacter via le formulaire</h3>
 
-                <form action="<?php bloginfo('template_directory'); ?>/form.php" method="post">
+                <form action="<?php bloginfo('template_directory'); ?>/form.php" method="post" id="contactForm">
                     <fieldset>
                         <?php the_content(); ?>
                     </fieldset>
@@ -81,13 +81,7 @@
             endif;
             wp_reset_query(); ?>
         </div>
-        <form action="#" method="post">
-            <fieldset>
-                <label for="newsletter">S'inscrire à notre newsletter</label>
-                <input type="email" placeholder="Votre email" id="newsletter"/>
-                <input type="submit" value="S'inscrire" name="S'inscrire"/>
-            </fieldset>
-        </form>
+        <script type="text/javascript" src="http://signup.ymlp.com/signup.js?id=gbeeqwbgmgj"></script>
     </aside>
     <div class="contactEquipe">
         <header>
@@ -116,5 +110,6 @@
         wp_reset_query(); ?>
 
     </div>
-
+    <script src="<?php echo get_template_directory_uri(); ?>/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/js/scriptFar.js" type="text/javascript"></script>
 <?php get_footer(); ?>

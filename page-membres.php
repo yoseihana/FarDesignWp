@@ -119,31 +119,36 @@
                                                                     if ($slug == 'cat-diapo')
                                                                     {
                                                                         ?>
-                                                                        <span class="icon-docs"></span>
+                                                                        <!--[if lt IE 9]><img class="imageIE" src="http://farwp.buffart.eu/wp-content/uploads/2013/05/1362949328_gnome-mime-application-vnd.ms-powerpoint.png"/><![endif]-->
+                                                                        <!--[if !IE]><!--><span class="icon-docs"></span><!--<![endif]-->
 
                                                                     <?php
                                                                     } elseif ($slug == 'cat-document')
                                                                     {
                                                                         ?>
-                                                                        <span class="icon-doc-alt"></span>
+                                                                        <!--[if lt IE 9]> <img class="imageIE" src="http://farwp.buffart.eu/wp-content/uploads/2013/05/1362949312_Files-Word.png"/><![endif]-->
+                                                                        <!--[if !IE]><!--><span class="icon-doc-alt"></span><!--<![endif]-->
 
                                                                     <?php
                                                                     } elseif ($slug == 'cat-image')
                                                                     {
                                                                         ?>
-                                                                        <span class="icon-picture-1"></span>
+                                                                        <!--[if lt IE 9]><img class="imageIE" src="http://farwp.buffart.eu/wp-content/uploads/2013/05/1362949390_style.png"/><![endif]-->
+                                                                        <!--[if !IE]><!--><span class="icon-picture-1"></span><!--<![endif]-->
 
                                                                     <?php
                                                                     } elseif ($slug == 'cat-tableur')
                                                                     {
                                                                         ?>
-                                                                        <span class="icon-picture-2"></span>
+                                                                        <!--[if lt IE 9]> <img class="imageIE" src="http://farwp.buffart.eu/wp-content/uploads/2013/05/1369311254_application-vnd.ms-excel.png"/> <![endif]-->
+                                                                        <!--[if !IE]><!--><span class="icon-picture-2"></span><!--<![endif]-->
 
                                                                     <?php
                                                                     } elseif ($slug == 'cat-url')
                                                                     {
                                                                         ?>
-                                                                        <span class="icon-globe-inv"></span>
+                                                                        <!--[if lt IE 9]> <img class="imageIE" src="http://farwp.buffart.eu/wp-content/uploads/2013/05/1362949374_www.png"/><![endif]-->
+                                                                        <!--[if !IE]><!--><span class="icon-globe-inv"></span><!--<![endif]-->
 
                                                                     <?php } ?>
                                                                     <p><?php the_title(); ?></p>
@@ -219,9 +224,10 @@
                 ?>
 
                 <li>
-                    <?php echo $lastPost['post_content']; ?>
+                    <?php
+                    echo $lastPost['post_content']; ?> <br/> <em><?php echo mysql2date('d-m-Y', $lastPost['post_date']); ?></em>
                 </li>
-            <?php endforeach ?>
+            <?php endforeach; ?>
         </ol>
     </div>
 </aside>
@@ -247,7 +253,7 @@
             <label for="user_pass">Mot de passe</label>
 
             <input type="password" tabindex="20" size="20" value="" id="user_pass" name="pwd">
-            <label><input type="checkbox" tabindex="90" value="forever" id="rememberme" name="rememberme">Rester connecter</label>
+            <input type="submit" tabindex="100" value="Se connecter" id="wp-submit" name="wp-submit">
 
             <!-- Voir ce qu'on fait dans ce cas-ci <a href="http://www.NOM_DU_SITE.com/wp-login.php?action=lostpassword">Mot de passe oublié</a>-->
 

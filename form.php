@@ -4,7 +4,7 @@ $email = $_POST['email'];
 $civilite = $_POST['civilite'];
 $surname = $_POST['prenom'];
 $phone = $_POST['tel'];
-$message = $_POST['message'];
+$message = $_POST['commentaire'];
 $de = 'From: FAR';
 $a = 'anna.buffart@gmail.com';
 $sujet = 'Un nouveau message sur far.be';
@@ -20,5 +20,5 @@ if(isset($_POST['submit'])){
         header('Location: http://farwp.buffart.eu/404error');
     }
 }
-
 ?>
+
