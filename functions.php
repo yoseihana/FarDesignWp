@@ -599,3 +599,17 @@ add_action('init', 'my_init');
  * Remove toolbar
  */
 add_filter( 'show_admin_bar', '__return_false' );
+
+/**
+ * Login Fail redirect
+ */
+add_action( 'wp_login_failed', 'login_fail_redirect' );  // hook failed login
+
+function login_fail_redirect( $username ) {
+    $referrer = $_SERVER['HTTP_REFERER'];  // where did the post submission come from?
+    // if there's a valid referrer, and it's not the default log-in screen
+    if ( !empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin') ) {
+        wp_redirect( $referrer . '?login=failed' );  // let's append some information (login=failed) to the URL for the theme to use
+        exit;
+    }
+}

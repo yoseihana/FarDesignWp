@@ -243,7 +243,7 @@
             <?php the_content(); ?>
         </div>
     <?php endwhile; endif; ?>
-    <form method="post" action="http://farwp.buffart.eu/wp-login.php" id="loginform" name="loginform">
+    <form method="post" action="<?php echo bloginfo('url'); ?>/wp-login.php" id="loginform" name="loginform">
         <fieldset>
             <legend class="icon-user-1">Se connecter</legend>
             <label for="user_login">Identifiant</label>
@@ -255,7 +255,7 @@
             <input type="password" tabindex="20" size="20" value="" id="user_pass" name="pwd">
             <input type="submit" tabindex="100" value="Se connecter" id="wp-submit" name="wp-submit">
 
-            <!-- Voir ce qu'on fait dans ce cas-ci <a href="http://www.NOM_DU_SITE.com/wp-login.php?action=lostpassword">Mot de passe oublié</a>-->
+            <a href="<?php echo bloginfo('url'); ?>/contacts/">Mot de passe oublié? Contactez le secrétariat</a>
 
             <input type="hidden" value="<?php echo bloginfo('url'); ?>/membres/" name="redirect_to">
         </fieldset>
@@ -265,5 +265,6 @@
 endif;
 ?>
 
+<script src="<?php echo get_template_directory_uri(); ?>/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/scriptFar.js" type="text/javascript"></script>
 <?php get_footer() ?>

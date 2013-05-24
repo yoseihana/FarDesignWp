@@ -209,6 +209,7 @@ aside, #contactForm, .liens img{
     .box-shadow(1px; 1px);
 }
 
+
 .header, .footer {
   clear: both;
   height: 125px;
@@ -612,6 +613,14 @@ section {
       text-align: center;
       margin: 2em 0 1em 0;
     }
+
+    img{
+      border-bottom: 5px solid @lightGrey;
+
+      &:hover{
+        border-color: @deepRed;
+      }
+    }
   }
 }
 
@@ -865,6 +874,7 @@ aside {
     font-family: @proLightIt;
   }
 
+
   fieldset {
     border: 1px solid @lightGrey;
     padding: 1em;
@@ -1035,6 +1045,22 @@ aside {
   height: 100%;
   .radius-corners();
   color: white;
+
+  .error {
+    font-family: @proLightIt;
+    margin-bottom: 1.5em;
+  }
+
+
+  a{
+    color: #fff;
+
+  }
+
+  input[type="submit"]{
+    .column(12);
+    margin-bottom: 1em;
+  }
 
   legend {
     font-family: @proBold;
