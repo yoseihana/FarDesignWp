@@ -63,6 +63,7 @@
                             <li class="year">
                                 <div>
                                     <h4><?php echo $catYear->name; ?></h4>
+                                    <!--[if lt IE 8]><span>+</span><![endif]-->
                                 </div>
                                 <ol>
                                     <?php
@@ -84,7 +85,8 @@
                                                     if ($catSubject->count >= 1)
                                                     {
                                                         echo '<em>' . $catSubject->count . '</em>';
-                                                    } ?></h5>
+                                                    } ?><!--[if lt IE 8]><span>+</span><![endif]--></h5>
+
                                             </div>
                                             <ul>
                                                 <?php query_posts(array(
@@ -119,36 +121,31 @@
                                                                     if ($slug == 'cat-diapo')
                                                                     {
                                                                         ?>
-                                                                        <!--[if lt IE 9]><img class="imageIE" src="http://farwp.buffart.eu/wp-content/uploads/2013/05/1362949328_gnome-mime-application-vnd.ms-powerpoint.png"/><![endif]-->
-                                                                        <!--[if !IE]><!--><span class="icon-docs"></span><!--<![endif]-->
+                                                                        <span class="icon-docs"></span>
 
                                                                     <?php
                                                                     } elseif ($slug == 'cat-document')
                                                                     {
                                                                         ?>
-                                                                        <!--[if lt IE 9]> <img class="imageIE" src="http://farwp.buffart.eu/wp-content/uploads/2013/05/1362949312_Files-Word.png"/><![endif]-->
-                                                                        <!--[if !IE]><!--><span class="icon-doc-alt"></span><!--<![endif]-->
+                                                                       <span class="icon-doc-alt"></span>
 
                                                                     <?php
                                                                     } elseif ($slug == 'cat-image')
                                                                     {
                                                                         ?>
-                                                                        <!--[if lt IE 9]><img class="imageIE" src="http://farwp.buffart.eu/wp-content/uploads/2013/05/1362949390_style.png"/><![endif]-->
-                                                                        <!--[if !IE]><!--><span class="icon-picture-1"></span><!--<![endif]-->
+                                                                        <span class="icon-picture-1"></span>
 
                                                                     <?php
                                                                     } elseif ($slug == 'cat-tableur')
                                                                     {
                                                                         ?>
-                                                                        <!--[if lt IE 9]> <img class="imageIE" src="http://farwp.buffart.eu/wp-content/uploads/2013/05/1369311254_application-vnd.ms-excel.png"/> <![endif]-->
-                                                                        <!--[if !IE]><!--><span class="icon-picture-2"></span><!--<![endif]-->
+                                                                        <span class="icon-picture-2"></span>
 
                                                                     <?php
                                                                     } elseif ($slug == 'cat-url')
                                                                     {
                                                                         ?>
-                                                                        <!--[if lt IE 9]> <img class="imageIE" src="http://farwp.buffart.eu/wp-content/uploads/2013/05/1362949374_www.png"/><![endif]-->
-                                                                        <!--[if !IE]><!--><span class="icon-globe-inv"></span><!--<![endif]-->
+                                                                        <span class="icon-globe-inv"></span>
 
                                                                     <?php } ?>
                                                                     <p><?php the_title(); ?></p>
@@ -245,7 +242,9 @@
     <?php endwhile; endif; ?>
     <form method="post" action="<?php echo bloginfo('url'); ?>/wp-login.php" id="loginform" name="loginform">
         <fieldset>
-            <legend class="icon-user-1">Se connecter</legend>
+            <!--[if lt IE 9]><legend>Se connecter</legend><![endif]-->
+            <!--[if !IE]><!--><legend class="icon-user-1">Se connecter</legend><!--<![endif]-->
+
             <label for="user_login">Identifiant</label>
 
             <input type="text" tabindex="10" size="20" value="" id="user_login" name="log">

@@ -42,25 +42,25 @@
                     if ($slug == 'cat-video')
                     {
                         ?>
-                        <!--[if !IE]><!--> <span class="icon-videocam"></span><!--<![endif]-->
+                        <span class="icon-videocam"></span>
 
                     <?php
                     } elseif ($slug == 'cat-blog')
                     {
                         ?>
-                        <!--[if !IE]><!--> <span class="icon-edit"></span><!--<![endif]-->
+                        <span class="icon-edit"></span>
 
 
                     <?php
                     } elseif ($slug == 'cat-journal')
                     {
                         ?>
-                        <!--[if !IE]><!--> <span class="icon-book-open"></span><!--<![endif]-->
+                        <span class="icon-book-open"></span>
                     <?php
                     } elseif ($slug == 'cat-documentation')
                     {
                         ?>
-                        <!--[if !IE]><!--> <span class="icon-folder-open"></span><!--<![endif]-->
+                        <span class="icon-folder-open"></span>
 
 
                     <?php } ?>

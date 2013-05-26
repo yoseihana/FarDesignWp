@@ -60,7 +60,8 @@
                             <ul>
                                 <?php query_posts(array('post_type' => 'chaine_youtube', 'category_chaine' => 'nos-chaines-youtube', 'orderby' => 'menu_order', 'order' => 'ASC'));
                                 if (have_posts()):while (have_posts()):the_post(); ?>
-                                    <li class="icon-youtube">
+                                    <!--[if lt IE 9]><li><![endif]-->
+                                    <!--[if !IE]><!--><li class="icon-youtube"><!--<![endif]-->
                                         <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>">
                                             <?php the_title() ?>
                                         </a>
@@ -75,7 +76,8 @@
                             <ul>
                                 <?php query_posts(array('post_type' => 'chaine_youtube', 'category_chaine' => 'nos-chaines-youtube-partenaires', 'orderby' => 'menu_order', 'order' => 'ASC'));
                                 if (have_posts()):while (have_posts()):the_post(); ?>
-                                    <li class="icon-youtube">
+                                    <!--[if lt IE 9]><li><![endif]-->
+                                    <!--[if !IE]><!--><li class="icon-youtube"><!--<![endif]-->
                                         <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>">
                                             <?php the_title() ?>
                                         </a>
