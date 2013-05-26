@@ -240,12 +240,12 @@
             <?php the_content(); ?>
         </div>
     <?php endwhile; endif; ?>
-    <form method="post" action="<?php echo bloginfo('url'); ?>/wp-login.php" id="loginform" name="loginform">
+    <!--<form method="post" action="<?php echo bloginfo('url'); ?>/wp-login.php" id="loginform" name="loginform">
         <fieldset>
-            <!--[if lt IE 9]><legend>Se connecter</legend><![endif]-->
-            <!--[if !IE]><!--><legend class="icon-user-1">Se connecter</legend><!--<![endif]-->
+            <!--[if lt IE 9]><!--<legend>Se connecter</legend><![endif]-->
+            <!--[if !IE]><!--><!--<legend class="icon-user-1">Se connecter</legend><!--<![endif]-->
 
-            <label for="user_login">Identifiant</label>
+           <!-- <label for="user_login">Identifiant</label>
 
             <input type="text" tabindex="10" size="20" value="" id="user_login" name="log">
 
@@ -258,6 +258,27 @@
 
             <input type="hidden" value="<?php echo bloginfo('url'); ?>/membres/" name="redirect_to">
         </fieldset>
+    </form>-->
+
+    <form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>" class="wp-user-form" id="loginform" name="loginform">
+        <fieldset>
+            <!--[if lt IE 9]><legend>Se connecter</legend><![endif]-->
+            <!--[if !IE]><!--><legend class="icon-user-1">Se connecter</legend><!--<![endif]-->
+
+        <label for="user_login"><?php _e('Username'); ?>: </label><br/>
+        <input type="text" name="log" value="<?php echo esc_attr(stripslashes($user_login)); ?>" size="20" id="user_login"/>
+
+        <label for="user_pass"><?php _e('Password'); ?>: </label>
+        <input type="password" name="pwd" value="" size="20" id="user_pass" />
+
+    <div class="login_fields">
+    <?php /*do_action('login_form');*/ ?>
+        <input type="submit" name="user-submit" value="<?php _e('Login'); ?>" class="user-submit" />
+        <input type="hidden" name="redirect_to" value="<?php echo $_SERVER['REQUEST_URI']; ?>" />
+        <input type="hidden" name="user-cookie" value="1" />
+    </div>
+            <p class="connectionString"><em><?php echo $ConnectString; ?></em></p>
+            <a href="<?php echo bloginfo('url'); ?>/contacts/">Mot de passe oublié? Contactez le secrétariat</a>
     </form>
     </section>
 <?php

@@ -91,20 +91,6 @@
             }
         });
 
-        $("#loginform").validate({
-            rules: {
-                user: {required: true},
-                pwd: {required: true, rangelength: [2, 20]}
-            },
-            messages: {
-                user: {required: "Entrez votre identifiant pour vous connecter"},
-                pwd: {required: "Entrez votre mot de passe"}
-            },
-            submitHandler: function (form) {
-                $("#loginform").submit();
-            }
-        });
-
 
         //END
     });
