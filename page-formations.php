@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div class="content">
+<div class="content" data-role="content">
     <header>
 
         <div class="slider">

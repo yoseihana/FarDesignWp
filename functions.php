@@ -588,58 +588,68 @@ if (!function_exists('far_setup'))
 /**
  * jQuery library
  */
-function my_init() {
-    if (!is_admin()) {
+function my_init()
+{
+    if (!is_admin())
+    {
         wp_enqueue_script('jquery');
     }
 }
+
 add_action('init', 'my_init');
 
 /**
  * Remove toolbar
  */
-add_filter( 'show_admin_bar', '__return_false' );
+add_filter('show_admin_bar', '__return_false');
+
+/**
+ * Restriction Admin
+ */
+function restrict_admin()
+{
+    if (!current_user_can('manage_options'))
+    {
+        wp_redirect(site_url());
+    }
+}
+
+add_action('admin_init', 'restrict_admin', 1);
 
 /**
  * Login Fail redirect
  */
-/*add_action( 'wp_login_failed', 'login_fail_redirect' );  // hook failed login
 
-function login_fail_redirect( $username ) {
-    $referrer = $_SERVER['HTTP_REFERER'];  // where did the post submission come from?
-    // if there's a valid referrer, and it's not the default log-in screen
-    if ( !empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin') ) {
-        wp_redirect( $referrer . '?login=failed' );  // let's append some information (login=failed) to the URL for the theme to use
+// hook failed login
+add_action( 'wp_login_failed', 'redirect_fail' );
+function redirect_fail( $user ) {
+    $referrer = $_SERVER['HTTP_REFERER'];
+    if ( !empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin') && $user!=null ) {
+        if ( !strstr($referrer, '?login=failed' )) {
+            wp_redirect( $referrer.'?login=failed' );
+            if (is_wp_error($user) && !in_array($user->get_error_code(), $ignore_codes) ) {
 
-        exit;
-    }
-}*/
-
-add_action('init', 'ConnectUserSite', 1);
-function ConnectUserSite() {
-
-    if (!is_admin()) {
-        global $ConnectString;
-        global $RegisterString;
-        $ConnectString = "<div class='my-error'>";
-        $RegisterString = $ConnectString;
-        //var_dump($_POST);
-        if (isset( $_POST['user-submit']) && !empty( $_POST['user-submit']))
-        {
-            global $error;
-
-            if ( $_POST['user-submit'] == __('Login'))
-            {
-                $postpass = array('user_login' => esc_attr($_POST['log']), 'user_password' => esc_attr($_POST['pwd']), 'remember' => esc_attr($_POST['rememberme']));
-                $user = wp_signon($postpass, false);
-                if ( is_wp_error($user) )
-                {
-                        $ConnectString .= '<div>Votre mot de passe ou identifiant est invalide</div>';
-                }
+                echo $ignore_codes->get_error_code();
 
             }
         }
-        $ConnectString .= '</div>';
-        $RegisterString .= '</div>';
+        exit;
+    }
+}
+//Si les champs sont nulls
+add_action( 'wp_authenticate', 'redirect_null');
+function redirect_null( $user ){
+    $referrer = $_SERVER['HTTP_REFERER'];
+    $error = false;
+    if($user == null || $_POST['pwd'] == '')
+    {
+        $error = true;
+    }
+    if ( !empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin') && $error ) {
+        if ( !strstr($referrer, '?login=failed') ) {
+            wp_redirect( $referrer.'?login=failed' );
+
+        }
+        exit;
     }
 }

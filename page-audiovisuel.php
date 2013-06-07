@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div class="content">
+<div class="content" data-role="content">
     <header>
         <div class="slider">
             <?php
@@ -28,7 +28,7 @@
         <?php endwhile; endif; ?>
         <div class="contentColonne">
             <h3>Vidéo à la une</h3>
-            <?php query_posts(array('post_type' => 'audiovisual', 'category_video' => 'nouvelle-video', 'posts_per_page' => 1));
+            <?php query_posts(array('post_type' => 'audiovisual', 'category_video' => 'nouvelle-video', 'posts_per_page' => 3));
             if (have_posts()):while (have_posts()):
             the_post(); ?>
             <div>
@@ -57,10 +57,10 @@
                         ?>
                         <div>
                             <h4><?php echo $category->name ?></h4>
-                            <ul>
+                            <ul data-role="listview" data-inset="true" data-split-icon="gear" data-split-theme="d">
                                 <?php query_posts(array('post_type' => 'chaine_youtube', 'category_chaine' => 'nos-chaines-youtube', 'orderby' => 'menu_order', 'order' => 'ASC'));
                                 if (have_posts()):while (have_posts()):the_post(); ?>
-                                    <!--[if lt IE 9]><li><![endif]-->
+                                    <!--[if lt IE 8]><li><![endif]-->
                                     <!--[if !IE]><!--><li class="icon-youtube"><!--<![endif]-->
                                         <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>">
                                             <?php the_title() ?>
@@ -73,7 +73,7 @@
                     <?php elseif ($category->slug == 'nos-chaines-youtube-partenaires'): ?>
                         <div>
                             <h4><?php echo $category->name ?></h4>
-                            <ul>
+                            <ul data-role="listview" data-inset="true" data-split-icon="gear" data-split-theme="d">
                                 <?php query_posts(array('post_type' => 'chaine_youtube', 'category_chaine' => 'nos-chaines-youtube-partenaires', 'orderby' => 'menu_order', 'order' => 'ASC'));
                                 if (have_posts()):while (have_posts()):the_post(); ?>
                                     <!--[if lt IE 9]><li><![endif]-->
@@ -90,10 +90,10 @@
             </div>
             <div class="films">
                 <h3>Nos films</h3>
-                <ul>
+                <ul data-role="collapsible-set">
                     <?php query_posts(array('post_type' => 'audiovisual', 'category_video' => 'nos-videos', 'posts_per_page' => 5, 'orderby' => 'menu_order', 'order' => 'ASC'));
                     if (have_posts()):while (have_posts()):the_post(); ?>
-                        <li>
+                        <li data-role="collapsible" data-collapsed="false" >
 
                             <h4><?php the_title(); ?></h4>
 
@@ -116,7 +116,7 @@
 
                 <h3>Toutes nos réalisations</h3>
             </header>
-            <ol>
+            <ol data-role="listview" data-inset="true" data-split-icon="gear" data-split-theme="d">
 
                 <?php
                 $years = $wpdb->get_col("SELECT DISTINCT YEAR(post_date) FROM $wpdb->posts ORDER BY post_date DESC");
@@ -138,7 +138,7 @@
                 </li>
             </ol>
         </div>
-        <div>
+        <div class="who">
             <?php query_posts(array('post_type' => 'contact', 'category_contact' => 'page-audiovisuel', 'posts_per_page' => 1));
             if (have_posts()):while (have_posts()):the_post(); ?>
                 <header>

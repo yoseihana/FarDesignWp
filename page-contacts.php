@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<div class="content">
+<div class="content" data-role="content">
     <header>
         <div class="slider">
             <?php
@@ -61,16 +61,16 @@
             wp_reset_query(); ?>
         </div>
         <div>
-            <header>
-                <h2 class="titleDisplay">Horaire du centre de documentation</h2>
+            <header class="opening">
+                <h2 class="titleDisplay">Horaire du centre de documentation et des archives</h2>
                 <span class="icon-clock"></span>
+            </header>
                 <?php
                 query_posts(array('post_type' => 'horaire', 'category_horaire' => 'cat-page-contact', 'orderby' => 'name'));
                 if (have_posts()):while (have_posts()):
                 the_post();
                 ?>
                 <h3><?php the_title(); ?></h3>
-            </header>
             <p><?php echo get_post_meta(get_the_ID(), 'horaire_day', true); ?></p>
 
             <p><?php echo get_post_meta(get_the_ID(), 'horaire_hour', true) ?></p>
@@ -89,12 +89,13 @@
                 Contacter les membres de l'équipe
             </h2>
         </header>
+        <ul data-role="listview" data-inset="true" data-split-theme="d">
         <?php
         query_posts(array('post_type' => 'equipe', 'orderby' => 'menu_order', 'order' => 'ASC', 'posts_per_page' => 20));
         if (have_posts()):while (have_posts()):
             the_post();
             ?>
-            <div>
+            <li class="lien">
                 <h3><?php the_title(); ?></h3>
                 <figure><?php the_post_thumbnail('thumbnail', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?></figure>
                 <p class="poste"><?php echo get_post_meta(get_the_ID(), 'poste_equipe', true); ?></p>
@@ -104,10 +105,11 @@
 
                 <p class="email"><?php echo get_post_meta(get_the_ID(), 'contact_email2', true); ?></p>
 
-            </div>
+            </li>
         <?php endwhile;
         endif;
         wp_reset_query(); ?>
+            </ul>
 
     </div>
     <script src="<?php echo get_template_directory_uri(); ?>/js/jquery.validate.min.js" type="text/javascript"></script>

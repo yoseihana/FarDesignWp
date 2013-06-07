@@ -1,36 +1,108 @@
 (function ($) {
-    var $slider = $('#slider-supported figure');
+    var $sliderFig = $('#slider-supported figure');
     var $niveau = $('.level');
-    var delay = 7000;
 
     //Slider accueil
-    var switchImg = function () {
 
-        var $nextImg = $slider.filter(':visible').next();
-
-        if ($nextImg.size() == 0) {
-            $nextImg = $slider.first();
-        }
-
-        $slider.filter(':visible').fadeOut('slow', function () {
-            $nextImg.fadeIn('slow');
-        });
+    // Ajout d'une méthode hasMatched à jQuery, vérifie si il y a ds le sélécteurs jQuery (au moins 1 élément)?
+    $.fn.hasMatched = function () {
+        return this.length > 0;
     };
 
-    var previousImg = function (e) {
-        var $nextImg = $slider.filter(':visible').prev();
+    //function self-executed avec comme paramètre le temps du slide en miliseconde
+    var slider = (function (delay) {
 
-        if ($nextImg.size() == 0) {
-            $nextImg = $slider.first();
-        }
+        //Création de l'object slides
+        var slides = {};
+        slides.$all = $sliderFig;
+        slides.$first = slides.$all.first('figure');
+        slides.$last = slides.$all.last('figure');
 
-        $slider.filter(':visible').fadeOut('fast', function () {
-            $nextImg.fadeIn('fast')
-        });
-    };
+        //Figure courant visible
+        slides.$current = function () {
+            var $cur = slides.$all.filter('figure:visible').first();
 
-    //
+            //Vérifie que c'est true?
+            if (!$cur.hasMatched())
+                $cur = slides.$first;
 
+            return $cur;
+        };
+
+        //Figure suivante
+        slides.$next = function () {
+            var $next = slides.$current().next('figure');
+
+            //Vérifie que c'est true?
+            if (!$next.hasMatched())
+                $next = slides.$first;
+
+            return $next;
+        };
+
+        //Figure précédente
+        slides.$previous = function () {
+            var $prev = slides.$current().prev('figure');
+
+            //Vérifie que c'est true
+            if (!$prev.hasMatched())
+                $prev = slides.$last;
+
+            return $prev;
+        };
+
+        // Hide tous les slides sauf le premier
+        slides.$all.not(slides.$current()).hide();
+
+        var nextSlide = function (forward) {
+            forward = (typeof forward === "boolean") ? forward : true;
+            var $nextFig = (forward) ? slides.$next() : slides.$previous();
+
+            if (slides.$current().add($nextFig).filter(':animated').hasMatched())
+                return false; // animation in progress. Cancelling ...
+
+            stopSlider();
+            slides.$current().fadeOut('fast', function () {
+                $nextFig.fadeIn('fast');
+            });
+            startSlider();
+        };
+
+        //Définition de intervalId avec undefined dedans
+        var intervalId = undefined;
+
+        //Lorsque le slider reprend
+        var startSlider = function () {
+            if (intervalId === undefined) {
+                intervalId = setInterval(function () {
+                    nextSlide();
+                }, delay);
+
+            }
+        };
+
+        //Lorsque le slider s'arrête
+        var stopSlider = function () {
+            if (intervalId !== undefined)
+                intervalId = clearInterval(intervalId);
+        };
+
+        //Lorsque le slider est en pause
+        var pauseSlider = function () {
+            if (intervalId !== undefined)
+                stopSlider();
+            else
+                startSlider();
+        };
+
+        // Return an API
+        return {
+            slide: nextSlide,
+            start: startSlider,
+            pause: pauseSlider
+        };
+
+    })(7500); // Slider Interval in ms;
 
     //Show Thematique
     var showYear = function (e) {
@@ -51,7 +123,11 @@
 
     //Load de routine
     $(function () {
-        $slider.not(":first").hide();
+        // Hereafter use slider.slide, slider.start and slider.pause at will
+       slider.start();
+       $('.precedent').on('click', function(){slider.slide(false)});
+       $('.suivant').on('click', function(){slider.slide();});
+       $('.pause').on('click', function(){slider.pause();});
 
         $niveau.find('.year ol').hide();
         $niveau.find('.subject ul').hide();
@@ -59,12 +135,11 @@
         $niveau.find('.year').click(showYear);
         $niveau.find('.subject').click(showThematique);
 
-        setInterval(switchImg, delay);
-        $('.precedent').on('click', previousImg);
-        $('.suivant').on('click', switchImg);
 
         $('#slider-not-supported').hide();
         $('#slider-supported').show();
+
+
 
         //Validation form
         $("#contactForm").validate({
@@ -91,8 +166,21 @@
             }
         });
 
+        $("#loginform").validate({
+            rules: {
+                log: {required: true,  minlength: 3},
+                pwd: {required: true,  minlength: 3},
+            },
+            messages: {
+                log: {required: "Entrez votre identifiant", minlength: "Votre identifiant doit avoir minimum 3 caractères"},
+                pwd: {required: "Entrez votre mot de passe", minlength: "Votre mot de passe doit avoir minimum 3 caractères"},
 
-        //END
+                submitHandler: function (e) {
+
+                }
+            }
+        });
+        //END form validation
     });
 
 })(jQuery);

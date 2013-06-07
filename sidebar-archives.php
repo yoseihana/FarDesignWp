@@ -6,7 +6,7 @@
 
             <h3>Toutes nos réalisations</h3>
         </header>
-        <ol>
+        <ol data-role="listview" data-inset="true" data-split-icon="gear" data-split-theme="d">
             <?php
             $years = $wpdb->get_col("SELECT DISTINCT YEAR(post_date) FROM $wpdb->posts ORDER BY post_date DESC");
             foreach ($years as $year) : ?>

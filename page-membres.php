@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<div class="content">
+<div class="content" data-role="content">
 <header>
     <div class="slider">
         <?php
@@ -30,7 +30,7 @@
         <p>Tous les documents en relation avec les cours.</p>
     </div>
     <div class="contentColonne">
-        <ol id="listingRoot">
+        <ol id="listingRoot" data-role="listview" data-inset="true">
             <?php
             $argsLevel = array(
                 'orderby' => 'name',
@@ -43,7 +43,7 @@
             foreach ($catLevels as $catLevel):
 
                 ?>
-                <li class="level">
+                <li class="level" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c">
                     <div>
                         <h3 id="<?php echo $catLevel->slug; ?>"><?php echo $catLevel->name; ?></h3>
                     </div>
@@ -81,7 +81,8 @@
                                         ?>
                                         <li class="subject">
                                             <div>
-                                                <h5><?php echo $catSubject->name;
+                                                <h5>
+                                                    <?php echo $catSubject->name;
                                                     if ($catSubject->count >= 1)
                                                     {
                                                         echo '<em>' . $catSubject->count . '</em>';
@@ -89,6 +90,7 @@
 
                                             </div>
                                             <ul>
+
                                                 <?php query_posts(array(
                                                     'post_type' => 'documents',
                                                     'tax_query' => array(
@@ -101,59 +103,58 @@
                                                 ));
                                                 if (have_posts()):while (have_posts()):
                                                     the_post(); ?>
+                                                    <li data-icon="false">
+                                                        <?php $postIds = get_the_ID();
 
-                                                    <li>
-                                                        <p><?php $postIds = get_the_ID();
+                                                        $argAttchment = array('post_type' => 'attachment', 'numberposts' => -1, 'post_status' => 'any', 'post_parent' => $postIds);
+                                                        $attachments = get_posts($argAttchment);
+                                                        if ($attachments): foreach ($attachments as $attachment):
 
-                                                            $argAttchment = array('post_type' => 'attachment', 'numberposts' => -1, 'post_status' => 'any', 'post_parent' => $postIds);
-                                                            $attachments = get_posts($argAttchment);
-                                                            if ($attachments): foreach ($attachments as $attachment):
+                                                            $excerptDoc = get_the_excerpt();
+                                                            $tags = array("<p>", "</p>");
+                                                            $excerptDoc = str_replace($tags, "", $excerptDoc);
+                                                            ?>
+                                                            <a rel="external" href="<?php echo wp_get_attachment_url($attachment->ID); ?>" title="<?php echo $excerptDoc; ?>">
+                                                                <?php
+                                                                $terms = wp_get_post_terms($postIds, 'category_type');
+                                                                $slug = $terms[0]->slug;
 
-                                                                $excerptDoc = get_the_excerpt();
-                                                                $tags = array("<p>", "</p>");
-                                                                $excerptDoc = str_replace($tags, "", $excerptDoc);
-                                                                ?>
-                                                                <a href="<?php echo wp_get_attachment_url($attachment->ID); ?>" title="<?php echo $excerptDoc; ?>">
-                                                                    <?php
-                                                                    $terms = wp_get_post_terms($postIds, 'category_type');
-                                                                    $slug = $terms[0]->slug;
+                                                                if ($slug == 'cat-diapo')
+                                                                {
+                                                                    ?>
+                                                                    <span class="icon-docs"></span>
 
-                                                                    if ($slug == 'cat-diapo')
-                                                                    {
-                                                                        ?>
-                                                                        <span class="icon-docs"></span>
+                                                                <?php
+                                                                } elseif ($slug == 'cat-document')
+                                                                {
+                                                                    ?>
+                                                                    <span class="icon-doc-alt"></span>
 
-                                                                    <?php
-                                                                    } elseif ($slug == 'cat-document')
-                                                                    {
-                                                                        ?>
-                                                                       <span class="icon-doc-alt"></span>
+                                                                <?php
+                                                                } elseif ($slug == 'cat-image')
+                                                                {
+                                                                    ?>
+                                                                    <span class="icon-picture-1"></span>
 
-                                                                    <?php
-                                                                    } elseif ($slug == 'cat-image')
-                                                                    {
-                                                                        ?>
-                                                                        <span class="icon-picture-1"></span>
+                                                                <?php
+                                                                } elseif ($slug == 'cat-tableur')
+                                                                {
+                                                                    ?>
+                                                                    <span class="icon-picture-2"></span>
 
-                                                                    <?php
-                                                                    } elseif ($slug == 'cat-tableur')
-                                                                    {
-                                                                        ?>
-                                                                        <span class="icon-picture-2"></span>
+                                                                <?php
+                                                                } elseif ($slug == 'cat-url')
+                                                                {
+                                                                    ?>
+                                                                    <span class="icon-globe-inv"></span>
 
-                                                                    <?php
-                                                                    } elseif ($slug == 'cat-url')
-                                                                    {
-                                                                        ?>
-                                                                        <span class="icon-globe-inv"></span>
-
-                                                                    <?php } ?>
-                                                                    <p><?php the_title(); ?></p>
-                                                                </a>
+                                                                <?php } ?>
+                                                                <p><?php the_title(); ?></p>
+                                                            </a>
 
 
-                                                            <?php endforeach;
-                                                            endif ?></p>
+                                                        <?php endforeach;
+                                                        endif ?>
 
                                                     </li>
                                                 <?php endwhile; endif; ?>
@@ -175,7 +176,7 @@
 <aside>
     <h2 class="titleDisplay">Racourcis des nouveaux et derniers cours ajoutés</h2>
 
-    <div>
+    <div class="levelShortcut">
         <header>
             <span class="icon-list-numbered"></span>
 
@@ -200,15 +201,15 @@
             <?php endforeach; ?>
         </ol>
     </div>
-    <div>
+    <div class="lastAdd">
         <header>
             <span class="icon-list-add"></span>
 
             <h3>
-                Derniers cours ajouter
+                Derniers cours ajouté
             </h3>
         </header>
-        <ol>
+        <ol data-role="listview" data-inset="true">
             <?php $argsLast = array(
                 'numberposts' => 5,
                 'orderby' => 'post_date',
@@ -220,7 +221,7 @@
             foreach ($lastPosts as $lastPost):
                 ?>
 
-                <li>
+                <li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="c">
                     <?php
                     echo $lastPost['post_content']; ?> <br/> <em><?php echo mysql2date('d-m-Y', $lastPost['post_date']); ?></em>
                 </li>
@@ -240,46 +241,31 @@
             <?php the_content(); ?>
         </div>
     <?php endwhile; endif; ?>
-    <!--<form method="post" action="<?php echo bloginfo('url'); ?>/wp-login.php" id="loginform" name="loginform">
-        <fieldset>
-            <!--[if lt IE 9]><!--<legend>Se connecter</legend><![endif]-->
-            <!--[if !IE]><!--><!--<legend class="icon-user-1">Se connecter</legend><!--<![endif]-->
+<?php
 
-           <!-- <label for="user_login">Identifiant</label>
+        $args = array(
+            'redirect' => site_url().'/membres',
+            'form_id' => 'loginform-custom',
+            'label_username' => __('Identifiant'),
+            'label_password' => __('Mot de passe'),
+            'label_log_in' => __('Connexion'),
+            'remember' => true,
+            'form_id' => 'loginform',
+        );
 
-            <input type="text" tabindex="10" size="20" value="" id="user_login" name="log">
+    if(isset($_GET['login']) && $_GET['login'] == 'failed')
+    {
+        ?>
+        <div id="login-error">
+            Problème lors de la connexion: vous avez entré un identifiant ou un mot de passe incorrecte
+        </div>
+    <?php
+    }
 
-            <label for="user_pass">Mot de passe</label>
 
-            <input type="password" tabindex="20" size="20" value="" id="user_pass" name="pwd">
-            <input type="submit" tabindex="100" value="Se connecter" id="wp-submit" name="wp-submit">
+    wp_login_form($args);
+    ?>
 
-            <a href="<?php echo bloginfo('url'); ?>/contacts/">Mot de passe oublié? Contactez le secrétariat</a>
-
-            <input type="hidden" value="<?php echo bloginfo('url'); ?>/membres/" name="redirect_to">
-        </fieldset>
-    </form>-->
-
-    <form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>" class="wp-user-form" id="loginform" name="loginform">
-        <fieldset>
-            <!--[if lt IE 9]><legend>Se connecter</legend><![endif]-->
-            <!--[if !IE]><!--><legend class="icon-user-1">Se connecter</legend><!--<![endif]-->
-
-        <label for="user_login"><?php _e('Username'); ?>: </label><br/>
-        <input type="text" name="log" value="<?php echo esc_attr(stripslashes($user_login)); ?>" size="20" id="user_login"/>
-
-        <label for="user_pass"><?php _e('Password'); ?>: </label>
-        <input type="password" name="pwd" value="" size="20" id="user_pass" />
-
-    <div class="login_fields">
-    <?php /*do_action('login_form');*/ ?>
-        <input type="submit" name="user-submit" value="<?php _e('Login'); ?>" class="user-submit" />
-        <input type="hidden" name="redirect_to" value="<?php echo $_SERVER['REQUEST_URI']; ?>" />
-        <input type="hidden" name="user-cookie" value="1" />
-    </div>
-            <p class="connectionString"><em><?php echo $ConnectString; ?></em></p>
-            <a href="<?php echo bloginfo('url'); ?>/contacts/">Mot de passe oublié? Contactez le secrétariat</a>
-    </form>
     </section>
 <?php
 endif;

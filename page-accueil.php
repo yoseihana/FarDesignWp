@@ -1,7 +1,7 @@
 <?php get_header(); ?>
-<div class="content">
+<div class="content" data-role="content">
 
-    <header>
+    <header class="banner">
         <h2 class="titleDisplay">Slider d'accueil</h2>
         <div id="slider-not-supported" class="sliderAccueil">
             <?php
@@ -11,7 +11,7 @@
                 ?>
                 <figure>
 
-                    <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>"><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?></a>
+                    <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>"><?php echo get_the_post_thumbnail(); ?></a>
 
                     <figcaption class="infoBanner">
                         <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>">
@@ -34,7 +34,9 @@
                 ?>
                 <figure>
 
-                    <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>"><?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?></a>
+                    <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>">
+                        <?php echo get_the_post_thumbnail(); ?>
+                    </a>
 
                     <figcaption class="infoBanner">
                         <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>">
@@ -42,17 +44,21 @@
 
                             <?php the_excerpt(); ?>
                         </a>
-                        <p class="precedent">
-                            <
-                        </p>
-
-                        <p class="suivant">
-                            >
-                        </p>
                     </figcaption>
                 </figure>
             <?php endwhile; endif;
             wp_reset_query(); ?>
+            <p class="precedent">
+                &lt;
+            </p>
+
+            <p class="pause">
+                Pause
+            </p>
+
+            <p class="suivant">
+                &gt;
+            </p>
         </div>
 
     </header>
@@ -69,7 +75,7 @@
 
         <footer>
             <nav class="linkTo">
-                <h2 class="noDisplay" style="display: none">Navigation interne</h2>
+                <h2 class="titleDisplay">Navigation interne</h2>
                 <ol>
                     <?php
                     query_posts(array('post_type' => 'autre_image', 'category_image' => 'navigation', 'posts_per_page'=>6, 'orderby'=>'menu_order'));
@@ -77,9 +83,9 @@
                     the_post();
                     ?>
                     <li>
-                        <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'link_title', true); ?>">
+                        <a href="<?php echo get_post_meta(get_the_ID(), 'link', true); ?>" title="<?php echo get_post_meta(get_the_ID(), 'title_link', true); ?>">
                             <figure>
-                                <?php the_post_thumbnail('full', array('alt' => trim(strip_tags($wp_postmeta->_wp_attachment_image_alt)))); ?>
+                                <?php echo get_the_post_thumbnail(); ?>
                                 <figcaption><?php echo the_title(); ?></figcaption>
 
                             </figure>

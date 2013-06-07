@@ -123,7 +123,7 @@
 }
 
 legend{
-  *margin-left: -0.5em;
+  *margin-left: -0.5em; /* Cible IE8 et inférieur */
 }
 
 /*
@@ -181,6 +181,10 @@ a {
   &:hover {
     text-decoration: underline;
   }
+
+  &:visited{
+    color: @deepBlue;
+  }
 }
 
 h3 {
@@ -200,8 +204,8 @@ p {
   font-size: 1.25em;
 }
 
-input:focus {
-  border-color: rgba(9, 96, 153, 0.8);
+#contactForm input:focus, #contactForm textarea:focus, #loginform input:focus{
+  border-color: @deepBlue;
   outline: 0;
   outline: thin dotted 9;
   -webkit-box-shadow: inset 0 5px 5px rgba(0, 0, 0, 0.075), 5px 5px 25px rgba(6, 31, 64, 0.6);
@@ -277,6 +281,7 @@ aside, #contactForm, .liens img{
       font-family: @proBold;
       margin-bottom: 1em;
       letter-spacing: 0.25px;
+      letter-spacing: 0.2px\9;
 
       &:before {
         content: '|';
@@ -349,7 +354,7 @@ aside, #contactForm, .liens img{
 
       a {
         margin-left: 0;
-        *margin-top: 0.5em;
+        *margin-top: 0.5em; /* Cible IE8 et inférieur */
       }
     }
 
@@ -518,20 +523,25 @@ body .sliderAccueil {
     }
   }
 
-  .precedent, .suivant {
+  .precedent, .suivant, .pause {
     position: absolute;
-    color: rgba(255, 255, 255, 0.8);
-    font-family: '@proRegular';
+    color: #ffffff;
+    font-family: @proBold;
     font-size: 2em;
     cursor: pointer;
     padding: 0 .5em;
-    margin-top: 0.5em;
-    margin-left: -0.75em;
-    color: #fff\9;
+    margin-top: 2em;
   }
 
   .suivant {
-    left: 885px;
+    left: 890px;
+  }
+
+  .pause{
+    left: 420px;
+    font-family: @aramanthBold;
+    padding: 0.5em 1em;
+    margin-top: 1.3em;
   }
 
   figure {
@@ -594,7 +604,7 @@ section {
 
     &:hover figcaption {
       border-bottom: 5px solid @deepRed;
-      *border-color: none;
+      *border-color: none; /* Cible IE 8 et inférieur */
     }
   }
 
@@ -688,7 +698,7 @@ h4 {
 /*
 * PUBLICATIONS
 */
-.page-id-6 section {
+.page-id-82 section {
 
   figure {
     width: 100%;
@@ -787,9 +797,9 @@ aside {
       float: none;
       width: 100%;
       margin-left: 0.2em;
-      *margin-top: -0.85em;
-      *float: right;
-      *margin-left: 13em;
+      *margin-top: -0.85em; /* Cible IE8 et inférieur */
+      *float: right; /* Cible IE8 et inférieur */
+      *margin-left: 13em; /* Cible IE8 et inférieur */
     }
   }
 
@@ -811,8 +821,8 @@ aside {
   h3 {
     color: #fff;
     padding: 0.5em 1em 0.25em 0.65em;
-    *margin-top: 0.5em;
-    *padding-top: 0em;
+    *margin-top: 0.5em; /* Cible IE8 et inférieur */
+    *padding-top: 0em; /* Cible IE8 et inférieur */
   }
 
   ol {
@@ -881,7 +891,7 @@ aside {
 
   li {
     list-style-type: none;
-    *list-style-type: disc;
+    *list-style-type: disc; /* Cible IE8 et inférieur */
     color: @deepRed;
     font-family: @proRegular;
     line-height: 1.5em;
@@ -944,7 +954,7 @@ aside {
 
       input {
         margin-left: 1.35em;
-        *margin-left: 1.25em;
+        margin-left: 1.25em\9;
       }
     }
 
@@ -958,7 +968,7 @@ aside {
   }
 }
 
-.page-id-20 {
+.page-id-25 {
   aside {
     margin-top: -1em;
 
@@ -991,7 +1001,7 @@ aside {
     height: 30px;
   }
 
-  div {
+  li {
     .column(3);
     height: 400px;
 
@@ -1029,10 +1039,14 @@ aside {
     margin-bottom: 1em;
   }
 
-  div {
+  li{
     .column(12);
     margin-bottom: 2em;
-    *margin-bottom: 1em;
+    *margin-bottom: 1em; /* Cible IE8 et inférieur */
+
+    p{
+      font-size: 1em;
+    }
   }
 
   .description {
@@ -1048,7 +1062,7 @@ aside {
   h3 {
     margin-top: 0;
     clear: none;
-    *padding-top: 1em;
+    *padding-top: 1em; /* Cible IE8 et inférieur */
   }
 
 }
@@ -1065,9 +1079,17 @@ aside {
   margin-bottom: 0em;
 }
 
-.page-id-336 aside {
+.page-id-27 aside {
   margin-top: 0.5em;
-  *margin-top: -0.75em;
+  *margin-top: -0.75em; /* Cible IE8 et inférieur */
+}
+
+#login-error {
+  font-family: @proLightIt;
+  margin-bottom: 1.5em;
+  background-color: #FFEBE8;
+  border:1px solid #C00;
+  padding:5px;
 }
 
 #loginform {
@@ -1080,29 +1102,31 @@ aside {
   .radius-corners();
   color: white;
 
-  .error {
-    font-family: @proLightIt;
-    margin-bottom: 1.5em;
+  .login-username, .login-password{
+    padding: 0em 1em;
   }
 
   a{
     color: #fff;
-
   }
 
   input[type="submit"]{
     float: none;
-    width: 100%;
-    margin-left: 0em;
+    width: 85%;
+    margin-left: 5%;
+    margin-right: 5%;
     margin-bottom: 1em;
+    height: 30px;
   }
 
-  legend {
-    font-family: @proBold;
+  .error{
+    font-family: @proLightIt;
   }
 
   label {
     color: #ffffff;
+    font-family: @proBold;
+    letter-spacing: 1px;
   }
 
   input:-webkit-autofill {
@@ -1110,10 +1134,13 @@ aside {
     color: @deepBlue !important;
   }
 
-  input {
+  input{
     background-color: @lightGrey;
     border-color: @lightGrey;
     color: @deepBlue;
+    height: 25px;
+    width: 245px;
+    .radius-corners();
 
     &[type="submit"]:hover {
       background-color: @deepBlue;
@@ -1122,9 +1149,14 @@ aside {
     }
   }
 
-  input[type="text"], input[type="password"] {
-    width: 245px;
-    .radius-corners();
+  input[type="checkbox"] {
+    width: 25px;
+    margin-left: 2em;
+    height: 15px;
+  }
+
+  input[type="submit"]{
+
   }
 }
 
@@ -1152,7 +1184,7 @@ aside {
   div {
     background-color: @deepRed;
     .column(12);
-    *width: 98%;
+    *width: 98%; /* Cible IE8 et inférieur */
     margin-bottom: 2em;
 
     h3 {
@@ -1217,8 +1249,8 @@ aside {
     .push(0.5);
     margin-bottom: 2em;
     cursor: pointer;
-    *width: 94%;
-    *margin: 0 0 1em 1em;
+    *width: 94%; /* Cible IE8 et inférieur */
+    *margin: 0 0 1em 1em; /* Cible IE8 et inférieur */
 
     p:after {
       content: "+";
@@ -1242,9 +1274,9 @@ aside {
       cursor: pointer;
       .column(12);
       margin-bottom: 1em;
-      *height: 50px;
-      *width: 96%;
-      *margin: 1em 0;
+      *height: 50px; /* Cible IE8 et inférieur */
+      *width: 96%; /* Cible IE8 et inférieur */
+      *margin: 1em 0; /* Cible IE8 et inférieur */
 
       /* For IE */
       span{
@@ -1299,4 +1331,39 @@ article {
 
 .category{
   margin-top: 0.25em;
+}
+
+/*************** MEDIA 481px **************/
+
+@media only screen and (max-width: 481px){
+  .header, .footer{
+    width: 1000px;
+  }
+
+  .content{
+    padding: 0 1em;
+  }
+}
+
+/*************** MEDIA 482px - 768px **************/
+@media only screen and (min-width: 483px) and (max-width: 768px){
+  .header, .footer{
+    width: 1000px;
+  }
+
+  .content{
+    padding: 0 1em;
+  }
+}
+
+/*************** MEDIA 945px - 770px **************/
+
+@media only screen and (max-width: 945px) and (min-width: 770px) {
+  .header, .footer{
+    width: 1000px;
+  }
+
+  .content{
+    padding: 0 1em;
+  }
 }
