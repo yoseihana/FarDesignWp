@@ -4,72 +4,86 @@
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong,
 sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption,
 footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-    display: block;
+  display: block;
 }
 
 body {
-    line-height: 150%;
+  line-height: 150%;
 }
 
 ol, ul {
-    list-style: none;
+  list-style: none;
 }
 
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 /*======================================================================*\
         Reset CSS based on Eric Meyer's work END
 \*======================================================================*/
-body{
-  color: black;
-  font-size: 12px;
-}
+@media print {
+  body {
+    color: black!important;
+    font-size: 12px!important;
+  }
 
-figure, .header, footer, img, #logOut, .sliderAccueil, #slider-not-supported, .slider, .page-id-25 .contentColonne, .publication figcaption, .linkPubli, iframe{
-  display: none;
-  border: none;
-}
+  figure, .header, footer, img, #logOut, .sliderAccueil, #slider-not-supported, .slider, .page-id-25 .contentColonne, .publication figcaption, .linkPubli, iframe, aside form {
+    display: none!important;
+    border: none!important;
+  }
 
-p, h1, h2, h3, h4, blockquote, em, a, span, li, section li, {
-  color: black;
-}
+  p, h1, h2, h3, h4, h5, blockquote, em, a, span, li, section li, {
+    color: black!important;
+  }
 
-a, a:visited{
-  text-decoration: underline;
-  color: black;
-}
+  h5{
+    border: none!important;
+  }
 
-h2{
-  font-weight: bold;
-  font-family: 32px;
-}
+  a, a:visited {
+    text-decoration: underline!important;
+    color: black!important;
+  }
 
-h3{
-  font-weight: bold;
-  font-family: 16px;
-}
+  h2 {
+    font-weight: bold!important;
+    font-family: 32px!important;
+  }
 
-.contactEquipe h4{
-  margin: 1em 0;
-}
+  h3 {
+    font-weight: bold!important;
+    font-family: 16px!important;
+  }
 
-aside p, aside dt, aside dd, aside h3, aside li, aside li a, .publication p, .publication h3, span{
-  color: black;
-}
+  .contactEquipe h4 {
+    margin: 1em 0!important;
+  }
 
-.level, .year, .subject{
-  margin: 10px 0;
-  padding: 0px;
+  .contactEquipe li{
+    height: 200px!important;
+  }
+
+  aside p, aside dt, aside dd, aside h3, aside li, aside li a, .publication p, .publication h3, span {
+    color: black!important;
+  }
+
+  .level, .year, .subject {
+    margin: 10px 0!important;
+    padding: 0px!important;
+  }
+
+  .farSites{
+    border-color: black!important;
+  }
 }

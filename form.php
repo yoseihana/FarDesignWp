@@ -27,7 +27,7 @@ $surname = $_POST['prenom'];
 $phone = $_POST['tel'];
 $message = $_POST['commentaire'];
 $to = $mail;
-$sujet = 'Mail test';
+$sujet = 'Un nouvel email depuis le site www.far.be';
 $from = "From:anna.buffart@gmail.com\n";
 $from .= "MIME-version: 1.0\n";
 $from .= "Content-type: text/html; charset= iso-8859-1\n";
@@ -57,7 +57,7 @@ $contenumail = '
 <body bgcolor="#FFFFFF">
 
 <font color="black">
-Bonjour,\nUn nouveau message a été envoyé depuis le site far.be. \nDe: ' . $surname . ' ' . $name . '\n Civilité: ' . $civilite . '\n Email: ' . $email . '\n Téléphone: ' . $phone . '\n Message:\n ' . $message . '
+Bonjour,\nUn nouveau message a été envoyé depuis le site far.be. <bt/>De: ' . $surname . ' ' . $name . '<br/>Civilité: ' . $civilite . '<br/> Email: ' . $email . '<br/> Téléphone: ' . $phone . '<br/>Message:<br/> ' . $message . '
 </font>
 
 </body>

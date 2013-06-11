@@ -93,7 +93,7 @@
                 <ul data-role="collapsible-set">
                     <?php query_posts(array('post_type' => 'audiovisual', 'category_video' => 'nos-videos', 'posts_per_page' => 5, 'orderby' => 'menu_order', 'order' => 'ASC'));
                     if (have_posts()):while (have_posts()):the_post(); ?>
-                        <li data-role="collapsible" data-collapsed="false" >
+                        <li data-role="collapsible" >
 
                             <h4><?php the_title(); ?></h4>
 

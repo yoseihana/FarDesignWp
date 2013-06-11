@@ -183,7 +183,7 @@ a {
   }
 
   &:visited{
-    color: @deepBlue;
+    //color: @deepBlue;
   }
 }
 
@@ -315,6 +315,10 @@ aside, #contactForm, .liens img{
 .footer {
   border-top: 5px solid #cfcfcf;
   height: 100%;
+
+  .current-menu-item a{
+    border-bottom: 1px solid @lightBlue;
+  }
 
   input[type="submit"] {
     height: 25px;
@@ -968,28 +972,28 @@ aside {
   }
 }
 
-.page-id-25 {
+.page-id-25, .page-id-356 {
   aside {
     margin-top: -1em;
 
     input[type='email'] {
       width: 250px;
     }
+  }
+}
 
-    dl {
-      padding: 0em 1em;
-      color: white;
-      font-size: 1.15em;
+dl {
+  padding: 0em 1em;
+  color: white;
+  font-size: 1.15em;
 
-      dt {
-        font-family: @proRegular;
-        margin-top: 0.5em;
-      }
+  dt {
+    font-family: @proRegular;
+    margin-top: 0.5em;
+  }
 
-      dd {
-        margin-top: 0.25em;
-      }
-    }
+  dd {
+    margin-top: 0.25em;
   }
 }
 
@@ -1219,7 +1223,7 @@ aside {
       font-size: 0.5em;
       line-height: 1em;
 
-      &:after {
+      &.more:after {
         content: '+';
         float: right;
         font-size: 1.5em;
@@ -1310,7 +1314,7 @@ aside {
       }
 
       span {
-        font-size: 2em;
+        font-size: 1.5em;
         color: @deepBlue;
       }
     }
@@ -1365,5 +1369,11 @@ article {
 
   .content{
     padding: 0 1em;
+  }
+
+  .level{
+    div{
+      height: 50px;
+    }
   }
 }

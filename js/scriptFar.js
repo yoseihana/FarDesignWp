@@ -121,13 +121,44 @@
 
     };
 
+    //See website in standard version
+    /*var notMobileVersion = function (e) {
+        alert('ok');
+        $('#styleMobileVersion').attr('disabled', 'disabled');
+        $('#jqueryMobileVersion').attr('disabled', 'disabled');
+        $('#jqueryMobileScript').attr('disabled', 'disabled');
+        $('#defaultStyle').removeAttr('disabled');
+        $('html').attr('data-role', 'none');
+        $('#mobileVersion').text('Version mobile');
+
+
+        $('#mobileVersion').on('click', getMobileVersion);
+    }
+
+    var getMobileVersion = function(e){
+        $('#styleMobileVersion').removeAttr('disabled');
+        $('#jqueryMobileVersion').removeAttr('disabled');
+        $('#jqueryMobileScript').removeAttr('disabled');
+        $('#defaultStyle').attr('disabled', 'disabled');
+
+        $('#mobileVersion').text('Version standard');
+
+        $('#mobileVersion').on('click', notMobileVersion);
+    }*/
+
     //Load de routine
     $(function () {
         // Hereafter use slider.slide, slider.start and slider.pause at will
-       slider.start();
-       $('.precedent').on('click', function(){slider.slide(false)});
-       $('.suivant').on('click', function(){slider.slide();});
-       $('.pause').on('click', function(){slider.pause();});
+        slider.start();
+        $('.precedent').on('click', function () {
+            slider.slide(false)
+        });
+        $('.suivant').on('click', function () {
+            slider.slide();
+        });
+        $('.pause').on('click', function () {
+            slider.pause();
+        });
 
         $niveau.find('.year ol').hide();
         $niveau.find('.subject ul').hide();
@@ -135,11 +166,18 @@
         $niveau.find('.year').click(showYear);
         $niveau.find('.subject').click(showThematique);
 
-
         $('#slider-not-supported').hide();
         $('#slider-supported').show();
 
+        $('.subject h5:has(em)').addClass('more')
 
+
+        //Check mobile version
+        /*if (jQuery.browser.mobile) {
+            //$('.copy p').append(' - <button class="ui-link" id="mobileVersion">Version standard</a>');
+            $('.copy p').find('#mobileVersion').on('touchstart click',notMobileVersion);
+            $('#defaultStyle').attr('disabled', 'disabled');
+        }*/
 
         //Validation form
         $("#contactForm").validate({
@@ -154,30 +192,29 @@
             messages: {
                 prenom: {required: "Entrez votre prénom", rangelength: "Votre prénom doit avoir minimum 2 lettres et maximum 20 lettres"},
                 nom: {required: "Entrez votre nom", rangelength: "Votre prénom doit avoir minimum 2 lettres et maximum 20 lettres"},
-                email: {required: "Votre adresse email est necessaire pour vous contacter", email: "Votre adresse email doit être dans ce format nom@domain.com", minlength: jQuery.format("Votre email doit avoir minimum 8 caractères ")},
+                email: {required: "Votre adresse email est necessaire pour vous contacter", email: "Votre adresse email doit être dans ce format nom@domain.com", minlength: "Votre email doit contenir minimum 8 caractères "},
                 commentaire: {required: "Entrez un message à nous communiquer", rangelength: "Votre message doit faire minimum 10 caractères et maximum 300 lettres"},
                 tel: {required: "Votre numéro de téléphone est nécessaire pour vous rapidement", rangelength: "Le numéro de téléphone doit avoir minimum 8 chiffres et maximum 15 lettres", number: "Le numéro de téléphone doit contenir uniquement des nombres"},
                 civilite: {required: 'Votre civilitée est necessaire'},
 
-                submitHandler: function (e) {
-                    $("#contactForm").find(".legend").
-                        text("Merci, votre message a été envoyé. Celui-ci sera traité par le secrétariat. Une secrétaire vous recontacteras dans les plus bref délais.")
-                }
+            },
+
+            submitHandler: function (form) {
+                form.submit();
             }
         });
 
         $("#loginform").validate({
             rules: {
-                log: {required: true,  minlength: 3},
-                pwd: {required: true,  minlength: 3},
+                log: {required: true, minlength: 3},
+                pwd: {required: true, minlength: 3},
             },
             messages: {
                 log: {required: "Entrez votre identifiant", minlength: "Votre identifiant doit avoir minimum 3 caractères"},
                 pwd: {required: "Entrez votre mot de passe", minlength: "Votre mot de passe doit avoir minimum 3 caractères"},
-
-                submitHandler: function (e) {
-
-                }
+            },
+            submitHandler: function (form) {
+                form.submit();
             }
         });
         //END form validation
